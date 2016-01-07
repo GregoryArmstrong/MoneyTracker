@@ -39,7 +39,7 @@ group :development, :test do
   gem 'launchy'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
-  gem 'better_errors'
+  # gem 'better_errors'
 end
 
 group :development do
