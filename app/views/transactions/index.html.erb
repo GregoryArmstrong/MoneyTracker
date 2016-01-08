@@ -6,5 +6,5 @@
   <%= transaction.description %>
   <%= transaction.amount %>
   <%= transaction.category.name %>
-  <%= link_to "Edit Transaction", edit_category_transaction_path([@category.id, transaction.id]) %>
+  <%= link_to "Edit Transaction", edit_category_transaction_path(transaction.category, transaction) %>
 <% end %>

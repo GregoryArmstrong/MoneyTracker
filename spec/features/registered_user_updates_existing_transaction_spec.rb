@@ -16,7 +16,7 @@ RSpec.feature "Registered user updates a transaction" do
     visit category_transactions_path(category)
 
     click_on "Edit Transaction"
-    expect(page).to have_content "Update Transaction"
+
     fill_in "Amount", with: updated_amount
     fill_in "Description", with: updated_description
     click_on "Update Transaction"

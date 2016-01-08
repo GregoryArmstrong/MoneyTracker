@@ -21,12 +21,16 @@ class TransactionsController < ApplicationController
 
   def edit
     @transaction = Transaction.find(params[:id])
-    @category = @transaction.category_id
-    redirect_to category_transactions_path
+    @category = @transaction.category
   end
 
   def update
-    @transaction.update(params(transaction_params))
+    @transaction = Transaction.find(params[:id])
+    @category = @transaction.category
+    @transaction.update(transaction_params)
+
+
+    redirect_to category_transactions_path
   end
 
   private
