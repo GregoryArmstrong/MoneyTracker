@@ -28,8 +28,12 @@ class TransactionsController < ApplicationController
     @transaction = Transaction.find(params[:id])
     @category = @transaction.category
     @transaction.update(transaction_params)
+    redirect_to category_transactions_path
+  end
 
-
+  def destroy
+    @transaction = Transaction.find(params[:id])
+    @transaction.destroy
     redirect_to category_transactions_path
   end
 
