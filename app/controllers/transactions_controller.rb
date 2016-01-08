@@ -1,6 +1,7 @@
 class TransactionsController < ApplicationController
 
   def index
+    @category = Category.find(params[:category_id])
     @transactions = Transaction.all
   end
 
@@ -16,6 +17,16 @@ class TransactionsController < ApplicationController
     @category.transactions << @transaction
     @user.transactions << @transaction
     redirect_to category_transactions_path
+  end
+
+  def edit
+    @transaction = Transaction.find(params[:id])
+    @category = @transaction.category_id
+    redirect_to category_transactions_path
+  end
+
+  def update
+    @transaction.update(params(transaction_params))
   end
 
   private

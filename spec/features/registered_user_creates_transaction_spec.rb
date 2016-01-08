@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "Registered creates a transaction" do
+RSpec.feature "Registered user creates a transaction" do
   scenario "they are redirected to index page" do
     category = create(:category)
     amount = 10
@@ -8,8 +8,8 @@ RSpec.feature "Registered creates a transaction" do
     user = User.create(username: "Greg", password: "password")
 
     visit login_path
-    fill_in "Username", with: "Greg"
-    fill_in "Password", with: "password"
+    fill_in "Username", with: user.username
+    fill_in "Password", with: user.password
     click_button "Login"
 
     visit category_transactions_path(category)
