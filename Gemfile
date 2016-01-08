@@ -40,6 +40,9 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'shoulda-matchers'
   # gem 'better_errors'
+  gem 'factory_girl_rails'
+  gem 'database_cleaner'
+  gem 'mocha'
 end
 
 group :development do

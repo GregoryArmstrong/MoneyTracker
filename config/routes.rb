@@ -10,4 +10,8 @@ Rails.application.routes.draw do
     resources :categories, only: [:index, :new, :create, :edit, :update, :destroy]
   end
 
+  resources :categories, only: [:index, :show] do
+    resources :transactions, except: [:show]
+  end
+
 end

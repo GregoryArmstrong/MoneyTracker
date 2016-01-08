@@ -1,0 +1,9 @@
+<h1>Transactions Index</h1>
+
+<%= link_to "Add Transaction", new_category_transaction_path %>
+
+<% @transactions.each do |transaction| %>
+  <%= transaction.description %>
+  <%= transaction.amount %>
+  <%= transaction.category.name %>
+<% end %>
