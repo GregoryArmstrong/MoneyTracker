@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Category, type: :model do
-  scenario "can create categories" do
-
+  context "validations" do 
+    it { is_expected.to have_many(:transactions) }
+    # it { is_expected.to validate_presence_of(:name) }
   end
 end
