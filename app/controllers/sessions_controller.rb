@@ -9,11 +9,14 @@ class SessionsController < ApplicationController
       session[:user_id] = @user.id
       redirect_to @user
     else
+      flash.now[:error] = "Invalid. Try Again."
+      render :new
     end
   end
 
   def destroy
     session.clear
+    flash[:notice] = "Goodbye!"
     redirect_to login_path
   end
 
