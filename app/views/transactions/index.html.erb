@@ -11,5 +11,5 @@
   <%= link_to "Delete Transaction", category_transaction_path(transaction.category, transaction), method: :delete %></li>
 <% end %>
 
-<h3>Average Transaction Amount: $<%= @transactions.average(:amount).round(2) %></h3>
-<%= pie_chart @transactions.group(:description).count %> 
+<h3>Average Transaction Amount: $<%= @transactions.average(:amount).round(2) unless !@transactions.nil? %></h3>
+<%= pie_chart @transactions.group(:description).count %>
