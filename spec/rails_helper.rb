@@ -5,13 +5,18 @@ require File.expand_path('../../config/environment', __FILE__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'spec_helper'
 require 'rspec/rails'
+require 'mocha'
 require 'capybara/rails'
 
-Shoulda::Matchers.configure do |config|
-  config.integrate do |with|
-    with.test_framework :rspec
-    with.library :rails
-  end
+  Shoulda::Matchers.configure do |config|
+    config.integrate do |with|
+      with.test_framework :rspec
+      with.library :rails
+    end
+
+  # RSpec.configure do |config|
+  #   config.mock_framework = :mocha
+  # end
 end
 
 # Add additional requires below this line. Rails is not loaded until this point!
