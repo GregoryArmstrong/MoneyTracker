@@ -1,8 +1,8 @@
-require 'test_helper'
+require 'rails_helper'
 
-class UserLoginTest < ActionDispatch::IntegrationTest
+RSpec.feature "registered user can login an account" do 
+  scenario "user redirected to user page" do
 
-  test "registered user can login" do
     user = User.create(username: "Greg", password: "password")
 
     visit login_path
@@ -10,7 +10,7 @@ class UserLoginTest < ActionDispatch::IntegrationTest
     fill_in "Password", with: "password"
     click_button "Login"
 
-    assert page.has_content?("Welcome, Greg")
+    expect(page).to have_content("Welcome, Greg")
   end
 
 end
