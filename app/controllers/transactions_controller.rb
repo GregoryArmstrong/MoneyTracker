@@ -4,11 +4,16 @@ class TransactionsController < ApplicationController
 
   def index
     # @category = Category.find(params[:category_id])
-    if params[:category_id]
+    @transactions = Transaction.all
+    if @transactions.nil?
+      flash[:notice] = "Add your first transaction for this category"
+      redirect_to new_category_transaction_path
+    elsif params[:category_id]
       @category = Category.find(params[:category_id])
-      @transactions = Transaction.where(category_id: params[:category_id])
+      @transactions = Transaction.where(category_id: params[:category_id]).where(user_id: current_user.id)
     else 
       @transactions = Transaction.where(user_id: current_user.id)
+      @categories = Category.all
       render :user_transactions
     end
   end
@@ -29,7 +34,7 @@ class TransactionsController < ApplicationController
       @category.transactions << @transaction
       @user.transactions << @transaction
       flash[:notice] = "Transaction Added"
-      redirect_to category_transactions_path
+      redirect_to category_transactions_path(@category)
     else 
       flash[:error] = "amount and description can't be blank"
       render :new

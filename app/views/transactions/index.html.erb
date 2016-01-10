@@ -1,6 +1,8 @@
 <h1><%= @category.name %> Transactions</h1>
 
-<%= link_to "Add Transaction", new_category_transaction_path %>
+<h5><%= link_to "Add Transaction", new_category_transaction_path %></h5>
+<h5><%= link_to "All Current User Transactions", transactions_path %></h5>
+
 <ul>
 <% @transactions.each do |transaction| %>
   <li><%= transaction.description %>
@@ -8,3 +10,6 @@
   <%= link_to "Edit Transaction", edit_category_transaction_path(transaction.category, transaction) %>
   <%= link_to "Delete Transaction", category_transaction_path(transaction.category, transaction), method: :delete %></li>
 <% end %>
+
+<h3>Average Transaction Amount: $<%= @transactions.average(:amount).round(2) %></h3>
+<%= pie_chart @transactions.group(:description).count %> 
