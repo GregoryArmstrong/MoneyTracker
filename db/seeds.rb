@@ -8,12 +8,12 @@
 
 User.create(username: "Steve", password: "$", role: 1)
 User.create(username: "Greg" , password: "$", role: 1)
-User.create(username: "Jordan", password: "$", role: 0)
+User.create(username: "Jordan", password: "$", role: 0) #ID 3
 User.create(username: "Penney", password: "$", role: 0)
 User.create(username: "Beth", password: "$", role: 0)
 
 
-Category.create(name: "Health")
+Category.create(name: "Health") #ID 2
 Category.create(name: "Restaurant")
 Category.create(name: "Transportation")
 Category.create(name: "Entertainment")
@@ -28,5 +28,5 @@ Transaction.create(amount: 15, description: "pizza", user_id: 3, category_id: 3)
 Transaction.create(amount: 10, description: "pizza", user_id: 3, category_id: 3)
 Transaction.create(amount: 10, description: "pizza", user_id: 3, category_id: 3)
 Transaction.create(amount: 10, description: "pizza", user_id: 3, category_id: 3)
-
+Transaction.create(amount: 10, description: "drugs", user_id: 3, category_id: 2)
 

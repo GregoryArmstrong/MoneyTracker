@@ -1,15 +1,25 @@
 class TransactionsController < ApplicationController
-  before_action :set_category, except: [:show, :destroy]
+  before_action :set_category, except: [:show, :destroy, :index, :new]
   before_action :set_transaction, only: [:edit, :update, :destroy]
 
   def index
     # @category = Category.find(params[:category_id])
-    @transactions = Transaction.all
+    if params[:category_id]
+      @category = Category.find(params[:category_id])
+      @transactions = Transaction.where(category_id: params[:category_id])
+    else 
+      @transactions = Transaction.where(user_id: current_user.id)
+      render :user_transactions
+    end
   end
 
   def new
     @transaction = Transaction.new
-    # @category = Category.find(params[:category_id])
+    if params[:category_id]
+      @category = Category.find(params[:category_id])
+    else 
+      @category = @selected_category
+    end 
   end
 
   def create

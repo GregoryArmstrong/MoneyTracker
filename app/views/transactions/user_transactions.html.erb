@@ -1,0 +1,23 @@
+<h1>All Transactions</h1>
+
+<%#= form_tag(:category, action: "new", url: new_category_transaction_path(:category_id, id: 2)) do |f| %>
+  <%#= f.collection_select(:category_id, Category.all, :id, :name) %> 
+
+  <%#= f.button_tag %> 
+<%# end %>
+
+
+
+
+   <%#= link_to "New Transaction", new_category_transaction_path(@selected_category) %>
+
+
+
+<%#= link_to "Add Transaction", new_category_transaction_path(transaction.category, transaction) %>
+  <ul>
+  <% @transactions.each do |transaction| %>
+    <li><%= transaction.description %>
+    $<%= transaction.amount %>
+    <%= link_to "Edit Transaction", edit_category_transaction_path(transaction.category, transaction) %>
+    <%= link_to "Delete Transaction", category_transaction_path(transaction.category, transaction), method: :delete %></li>
+<% end %>
