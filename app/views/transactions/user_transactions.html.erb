@@ -1,29 +1,24 @@
 <h1>All Transactions</h1>
+<h3>Average Transaction Amount: $<%= @transactions.average(:amount).round(2) %></h3>
+<h3>Transaction Count By Description:</h3>
+<%= pie_chart @transactions.group(:description).count %>
+<h3>Transaction Average Per Category</h3>
+<%= bar_chart [
+  {name: "Health", data: @transactions.group(:category_id).where(category_id: 1).average(:amount)},
+  {name: "Restaurant", data: @transactions.group(:category_id).where(category_id: 2).average(:amount)},
+  {name: "Transportation", data: @transactions.group(:category_id).where(category_id: 3).average(:amount)},
+  {name: "Entertainment", data: @transactions.group(:category_id).where(category_id: 4).average(:amount)},
+  {name: "Miscellaneous", data: @transactions.group(:category_id).where(category_id: 5).average(:amount)},
+  {name: "Income", data: @transactions.group(:category_id).where(category_id: 6).average(:amount)}
+  ]%>
 
-<%#= form_tag(:category, action: "new", url: new_category_transaction_path(:category_id, id: 2)) do |f| %>
-  <%#= f.collection_select(:category_id, Category.all, :id, :name) %> 
-
-  <%#= f.button_tag %> 
-<%# end %>
-
-
-
-
-   <%#= link_to "New Transaction", new_category_transaction_path(@selected_category) %>
-
-
-
-<%#= link_to "Add Transaction", new_category_transaction_path(transaction.category, transaction) %>
 
   <ul>
-  <% @transactions.each do |transaction| %>
+    <% @transactions.each do |transaction| %>
     <li><%= transaction.description %>
-    $<%= transaction.amount %>
-    View <%= link_to "#{transaction.category.name}", category_transactions_path(transaction.category) %></li>
-    <br><%= link_to "Edit Transaction", edit_category_transaction_path(transaction.category, transaction) %>
-    <%= link_to "Delete Transaction", category_transaction_path(transaction.category, transaction), method: :delete %><br><br>
-<% end %>
-
-<h3>Average Transaction Amount: $<%= @transactions.average(:amount).round(2) %></h3>
-<%= pie_chart @transactions.group(:description).count %> 
-<%#= pie_chart @transactions.group(:category_id).select(:name) %> 
+      $<%= transaction.amount %>
+      View <%= link_to "#{transaction.category.name}", category_transactions_path(transaction.category) %></li>
+      <br><%= link_to "Edit Transaction", edit_category_transaction_path(transaction.category, transaction) %>
+      <%= link_to "Delete Transaction", category_transaction_path(transaction.category, transaction), method: :delete %><br><br>
+      <% end %>
+    </ul>
