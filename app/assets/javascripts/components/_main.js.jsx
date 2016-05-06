@@ -3,6 +3,7 @@ var Main = React.createClass({
     return (
       <div>
         <Header pageTitle={ this.props.title }/>
+        <UserBody />
       </div>
     );
   }
