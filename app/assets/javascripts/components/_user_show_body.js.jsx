@@ -16,7 +16,9 @@ var UserShowBody = React.createClass({
     return (
       <div>
         <UserShowNewTransaction handleSubmit={ this.handleSubmit } user={ this.props.user }/>
-        <UserShowAllTransactions transactions={ this.state.transactions }/>
+        <ul>
+          <UserShowAllTransactions transactions={ this.state.transactions }/>
+        </ul>
       </div>
     );
   }

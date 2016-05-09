@@ -9,10 +9,9 @@ class SessionsController < ApplicationController
     @user = User.find_by(username: params[:session][:username])
     if @user && @user.authenticate(params[:session][:password]) && !@user.transactions.empty?
       session[:user_id] = @user.id
-      redirect_to transactions_path
+      respond_with @user
     elsif @user && @user.authenticate(params[:session][:password])
       session[:user_id] = @user.id
-      # redirect_to @user
       respond_with @user
     else
       flash.now[:error] = "Invalid. Try Again."
