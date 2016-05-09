@@ -8,8 +8,7 @@ var NewUser = React.createClass({
       type: 'POST',
       data: { user: { username: name, password: password } },
       success: (user) => {
-        // this.props.handleSubmit(skill);
-        console.log(user);
+        window.location.href = "/users/" + user.id + "transactions";
       }
     });
   },
