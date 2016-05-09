@@ -1,14 +1,14 @@
-var NewUser = React.createClass({
+var NewSessionMain = React.createClass({
   handleClick() {
     let name      = this.refs.userName.value;
     let password  = this.refs.userPassword.value;
 
     $.ajax({
-      url: '/api/v1/users',
+      url: '/login',
       type: 'POST',
-      data: { user: { username: name, password: password } },
+      data: { session: { username: name, password: password }},
       success: (user) => {
-        window.location.href = "/login";
+        window.location.href = "/users/" + user.id;
       }
     });
   },
@@ -16,9 +16,9 @@ var NewUser = React.createClass({
   render() {
     return (
       <div>
-        <input ref='userName' placeholder='Name' />
+        <input ref='userName' placeholder='User Name' />
         <input ref='userPassword' placeholder='Password' />
-        <button onClick={ this.handleClick }>Create User</button>
+        <button onClick={ this.handleClick }>Login</button>
       </div>
     );
   }

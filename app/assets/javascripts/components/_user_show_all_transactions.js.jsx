@@ -1,0 +1,3 @@
+var UserShowAllTransactions = React.createClass({
+
+});

@@ -1,4 +1,4 @@
-var UserBody = React.createClass({
+var NewUserBody = React.createClass({
   render () {
     return (
       <div>

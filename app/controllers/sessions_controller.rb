@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
 
+  respond_to :json
+
   def new
   end
 
@@ -10,7 +12,8 @@ class SessionsController < ApplicationController
       redirect_to transactions_path
     elsif @user && @user.authenticate(params[:session][:password])
       session[:user_id] = @user.id
-      redirect_to @user
+      # redirect_to @user
+      respond_with @user
     else
       flash.now[:error] = "Invalid. Try Again."
       render :new

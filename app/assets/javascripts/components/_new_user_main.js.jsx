@@ -1,9 +1,9 @@
-var Main = React.createClass({
+var NewUserMain = React.createClass({
   render() {
     return (
       <div>
         <Header pageTitle={ this.props.title }/>
-        <UserBody />
+        <NewUserBody />
       </div>
     );
   }
