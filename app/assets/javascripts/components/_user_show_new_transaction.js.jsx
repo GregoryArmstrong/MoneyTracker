@@ -3,11 +3,12 @@ var UserShowNewTransaction = React.createClass({
     let description    = this.refs.transactionDescription.value;
     let amount         = this.refs.transactionAmount.value * 100;
     let category       = this.refs.transactionCategory.value;
+    let date           = this.refs.transactionDate.value;
 
     $.ajax({
       url: '/api/v1/transactions',
       type: 'POST',
-      data: { transaction: { description: description, amount: amount, category_id: category }},
+      data: { transaction: { description: description, amount: amount, category_id: category, date: date }},
       success: (transaction) => {
         this.props.handleSubmit(transaction);
       }
@@ -27,6 +28,7 @@ var UserShowNewTransaction = React.createClass({
           <option value='5'>Miscellaneous</option>
           <option value='6'>Income</option>
         </select>
+        <input ref='transactionDate' type='date' name='date' />
         <button onClick={ this.handleClick }>Submit</button>
       </div>
     );
