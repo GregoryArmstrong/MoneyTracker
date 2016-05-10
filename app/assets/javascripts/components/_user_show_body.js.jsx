@@ -12,6 +12,17 @@ var UserShowBody = React.createClass({
     this.setState({ transactions: newState });
   },
 
+  handleUpdate(transaction) {
+    $.ajax({
+      url: `/api/v1/transactions/${transaction.id}`,
+      type: 'PUT',
+      data: { transaction: transaction },
+      success: (transaction) => {
+        this.updateTransactions(transaction)
+      }
+    });
+  },
+
   handleDelete(id) {
     $.ajax({
       url: `/api/v1/transactions/${id}`,
@@ -20,6 +31,13 @@ var UserShowBody = React.createClass({
         this.removeTransactionFromDOM(id);
       }
     });
+  },
+
+  updateTransactions(transaction) {
+    let transactions = this.state.transactions.filter((t) => { return t.id != transaction.id });
+    transactions.push(transaction);
+
+    this.setState({ transactions: transactions });
   },
 
   removeTransactionFromDOM(id) {
@@ -37,6 +55,7 @@ var UserShowBody = React.createClass({
         <ul>
           <UserShowAllTransactions  transactions={ this.state.transactions }
                                     handleDelete={ this.handleDelete }
+                                    onUpdate={ this.handleUpdate }
                                     />
         </ul>
       </div>

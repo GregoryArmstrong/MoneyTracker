@@ -14,6 +14,12 @@ class Api::V1::TransactionsController < Api::V1::BaseController
     respond_with Transaction.destroy(params[:id])
   end
 
+  def update
+    transaction = Transaction.find(params["id"])
+    transaction.update_attributes(transaction_params)
+    respond_with transaction, json: transaction
+  end
+
   private
 
   def transaction_params
