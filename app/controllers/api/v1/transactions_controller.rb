@@ -23,7 +23,7 @@ class Api::V1::TransactionsController < Api::V1::BaseController
   private
 
   def transaction_params
-    params.require(:transaction).permit(:amount, :description)
+    params.require(:transaction).permit(:amount, :description, :category_id)
   end
 
 end

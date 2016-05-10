@@ -7,7 +7,7 @@ var Transaction = React.createClass({
     if (this.state.editable) {
       let transaction = { id: this.props.transaction.id,
                           description: this.refs.description.value,
-                          amount: this.refs.amount.value }
+                          amount: this.refs.amount.value * 100 }
 
       this.props.handleUpdate(transaction);
     }
@@ -22,14 +22,12 @@ var Transaction = React.createClass({
                                           : <h1>{ this.props.transaction.description }</h1>;
     var amount      = this.state.editable ? <input type='text'
                                               ref='amount'
-                                              defaultValue={ this.props.transaction.amount } />
-                                          : <h2>{ this.props.transaction.amount }</h2>;
+                                              defaultValue={ this.props.transaction.amount / 100 } />
+                                          : <h2>{ this.props.transaction.amount / 100 }</h2>;
 
     return (
       <div>
         <li>
-          {/*<h1>{ this.props.transaction.description }</h1>
-          <h2>{ this.props.transaction.amount }</h2>*/}
           { description }
           { amount }
           <button onClick={ this.props.handleDelete }>Delete</button>
