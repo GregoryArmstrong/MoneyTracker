@@ -10,6 +10,10 @@ class Api::V1::TransactionsController < Api::V1::BaseController
     respond_with :api, :v1, @transaction
   end
 
+  def destroy
+    respond_with Transaction.destroy(params[:id])
+  end
+
   private
 
   def transaction_params

@@ -12,12 +12,32 @@ var UserShowBody = React.createClass({
     this.setState({ transactions: newState });
   },
 
+  handleDelete(id) {
+    $.ajax({
+      url: `/api/v1/transactions/${id}`,
+      type: 'DELETE',
+      success: () => {
+        this.removeTransactionFromDOM(id);
+      }
+    });
+  },
+
+  removeTransactionFromDOM(id) {
+    let newTransactions = this.state.transactions.filter((transaction) => {
+      return transaction.id != id;
+    });
+
+    this.setState({ transactions: newTransactions });
+  },
+
   render() {
     return (
       <div>
         <UserShowNewTransaction handleSubmit={ this.handleSubmit } user={ this.props.user }/>
         <ul>
-          <UserShowAllTransactions transactions={ this.state.transactions }/>
+          <UserShowAllTransactions  transactions={ this.state.transactions }
+                                    handleDelete={ this.handleDelete }
+                                    />
         </ul>
       </div>
     );
