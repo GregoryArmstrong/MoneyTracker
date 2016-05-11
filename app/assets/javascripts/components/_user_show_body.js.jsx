@@ -1,15 +1,18 @@
 var UserShowBody = React.createClass({
   getInitialState() {
-    return { transactions: [] };
+    return { transactions: [], transactionsTotal: 0 };
   },
 
   componentDidMount() {
     $.getJSON('/api/v1/transactions.json', (response) => { this.setState({ transactions: response }) });
+    $.getJSON('/api/v1/transactions/total.json', (response) => { this.setState({ transactionsTotal: response }) });
   },
 
   handleSubmit(transaction) {
-    let newState = this.state.transactions.concat(transaction);
-    this.setState({ transactions: newState });
+    let newTransactionsState = this.state.transactions.concat(transaction);
+    let newTransactionsTotalState = this.state.transactionsTotal + transaction.amount;
+
+    this.setState({ transactions: newTransactionsState, transactionsTotal: newTransactionsTotalState });
   },
 
   handleUpdate(transaction) {
@@ -59,6 +62,7 @@ var UserShowBody = React.createClass({
                                     onUpdate={ this.handleUpdate }
                                     />
         </ul>
+        <UserShowTransactionsTotal transactionsTotal={ this.state.transactionsTotal }/>
       </div>
     );
   }

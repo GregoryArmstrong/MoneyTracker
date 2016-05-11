@@ -20,6 +20,10 @@ class Api::V1::TransactionsController < Api::V1::BaseController
     respond_with transaction, json: transaction
   end
 
+  def total
+    respond_with Transaction.where(user_id: current_user.id).sum(:amount)
+  end
+
   private
 
   def transaction_params

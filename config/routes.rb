@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
-  # get '/transactions', to: 'transactions#index'
+  get '/api/v1/transactions/total', to: 'api/v1/transactions#total'
 
   namespace :admin do
     resources :categories, only: [:index, :new, :create, :edit, :update, :destroy]
