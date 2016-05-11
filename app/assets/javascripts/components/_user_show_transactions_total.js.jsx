@@ -4,6 +4,6 @@ var UserShowTransactionsTotal = React.createClass({
       <div>
         { this.props.transactionsTotal / 100 }
       </div>
-    )
+    );
   }
-})
+});

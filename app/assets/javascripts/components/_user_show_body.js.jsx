@@ -44,11 +44,16 @@ var UserShowBody = React.createClass({
   },
 
   removeTransactionFromDOM(id) {
+    let newTransactionsTotal = this.state.transactionsTotal
     let newTransactions = this.state.transactions.filter((transaction) => {
+      if (transaction.id == id) {
+        newTransactionsTotal = newTransactionsTotal - transaction.amount;
+      }
       return transaction.id != id;
     });
 
-    this.setState({ transactions: newTransactions });
+
+    this.setState({ transactions: newTransactions, transactionsTotal: newTransactionsTotal });
   },
 
   render() {
