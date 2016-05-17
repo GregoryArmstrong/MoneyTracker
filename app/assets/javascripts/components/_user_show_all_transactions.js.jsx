@@ -20,7 +20,7 @@ var UserShowAllTransactions = React.createClass({
     });
 
     return (
-      <div>
+      <div className='all-transactions'>
         { transactions }
       </div>
     );

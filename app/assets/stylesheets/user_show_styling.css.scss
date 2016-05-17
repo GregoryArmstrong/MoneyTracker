@@ -1,0 +1,79 @@
+body {
+  background-color: #0B486B !important;
+  color: white !important;
+  font-family: 'Poiret One', cursive;
+}
+
+h1 {
+  padding: 10px;
+  margin: 10px;
+  color: #CFF09E !important;
+}
+
+h2 {
+  color: #A8DBA8 !important;
+}
+
+ul {
+  display: flex;
+}
+
+li {
+  display: inline-flex;
+}
+
+.all-transactions {
+  display: flex;
+  flex-direction: column;
+}
+
+.transaction {
+  padding: 5px;
+  margin: 5px;
+  background-color: #3B8686;
+  width: 100vw;
+  border-color: #CFF09E;
+  border-style: outset;
+}
+
+.transaction-amount {
+  position: absolute;
+  right: 25px;
+}
+
+.transactions-total {
+  position: absolute;
+  right: 0px;
+}
+
+.new-transaction {
+  padding: 10px;
+  margin: auto;
+  position: relative;
+}
+
+.user-show-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.header {
+  margin: auto;
+}
+
+button, input, select {
+  padding: 10px;
+  margin: 10px;
+  font-size: 25px;
+  background-color: #3B8686;
+  border-color: #CFF09E;
+  border-style: outset;
+  border-radius: 15px;
+  font-family: 'Poiret One', cursive;
+  color: #CFF09E;
+}
+
+::-webkit-input-placeholder {
+   color: #CFF09E;
+}

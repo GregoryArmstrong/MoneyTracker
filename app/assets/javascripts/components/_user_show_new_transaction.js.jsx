@@ -17,7 +17,7 @@ var UserShowNewTransaction = React.createClass({
 
   render() {
     return (
-      <div>
+      <div className='new-transaction'>
         <input ref='transactionDescription' placeholder='Transaction Description' />
         <input ref='transactionAmount' placeholder='Amount' />
         <select ref='transactionCategory'>

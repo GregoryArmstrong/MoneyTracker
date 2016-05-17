@@ -58,7 +58,7 @@ var UserShowBody = React.createClass({
 
   render() {
     return (
-      <div>
+      <div className='user-show-body'>
         <Header pageTitle='All Transactions' />
         <UserShowNewTransaction handleSubmit={ this.handleSubmit } user={ this.props.user }/>
         <ul>

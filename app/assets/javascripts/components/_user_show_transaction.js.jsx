@@ -25,7 +25,7 @@ var Transaction = React.createClass({
     var amount        = this.state.editable ? <input type='text'
                                               ref='amount'
                                               defaultValue={ this.props.transaction.amount / 100 } />
-                                            : <h2>{ this.props.transaction.amount / 100 }</h2>;
+                                            : <h2 className='transaction-amount'>${ this.props.transaction.amount / 100 }</h2>;
     var categories    = this.state.editable ? (<select ref='editableTransactionCategory'>
                                                <option value='1'>Health</option>
                                                <option value='2'>Food</option>
@@ -42,13 +42,13 @@ var Transaction = React.createClass({
                                             : 'Edit';
     return (
       <div>
-        <li>
-          { date }
-          { description }
-          { amount }
-          { categories }
+        <li className='transaction'>
           <button onClick={ this.onUpdate }>{ submitOrEdit }</button>
           <button onClick={ this.props.handleDelete }>Delete</button>
+          { date }
+          { description }
+          { categories }
+          { amount }
         </li>
       </div>
     );
