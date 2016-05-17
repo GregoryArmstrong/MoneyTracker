@@ -1,5 +1,1 @@
-<h1>Welcome to MoneyTracker!</h1>
-
-<p>Let's setup your first entries</p>
-
-<%= link_to "Setup Account", new_category_transaction_path(category_id: 6) %>
+<%= react_component('UserShowMain', { title: 'User Dashboard', user: @user } ) %>

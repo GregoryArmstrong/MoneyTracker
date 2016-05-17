@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
 
-  resources :users, only: [:new, :create, :show]
+  resources :users, only: [:new, :create, :show] do
+    resources :transactions, only: [:index]
+  end
 
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
-  get '/transactions', to: 'transactions#index'
+  get '/api/v1/transactions/total', to: 'api/v1/transactions#total'
 
   namespace :admin do
     resources :categories, only: [:index, :new, :create, :edit, :update, :destroy]
@@ -13,6 +15,13 @@ Rails.application.routes.draw do
 
   resources :categories, only: [:index, :show] do
     resources :transactions #, except: [:show]
+  end
+
+  namespace :api do
+    namespace :v1 do
+      resources :users, only: [:create, :show]
+      resources :transactions, only: [:index, :create, :show, :update, :destroy]
+    end
   end
 
 end
