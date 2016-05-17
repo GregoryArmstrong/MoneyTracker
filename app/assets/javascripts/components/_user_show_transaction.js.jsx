@@ -18,6 +18,16 @@ var Transaction = React.createClass({
   },
 
   render(){
+    const categoryNames = {
+                            1: 'Health',
+                            2: 'Food',
+                            3: 'Transportation',
+                            4: 'Entertainment',
+                            5: 'Miscellaneous',
+                            6: 'Income'
+                          };
+    // var categoryName = categoryNames[ this.props.category_id ];
+
     var description   = this.state.editable ? <input type='text'
                                                    ref='description'
                                                    defaultValue={ this.props.transaction.description } />
@@ -34,9 +44,9 @@ var Transaction = React.createClass({
                                                <option value='5'>Miscellaneous</option>
                                                <option value='6'>Income</option>
                                              </select>)
-                                            : <div></div>;
+                                            : <h2> - { categoryNames[this.props.transaction.category_id] } - </h2>;
     var date          = this.state.editable ? <input ref='transactionDate' type='date' name='date' />
-                                            : <h2>{ this.props.transaction.date }</h2>
+                                            : <h2>{ this.props.transaction.date }</h2>;
 
     var submitOrEdit  = this.state.editable ? 'Submit'
                                             : 'Edit';
@@ -46,8 +56,8 @@ var Transaction = React.createClass({
           <button onClick={ this.onUpdate }>{ submitOrEdit }</button>
           <button onClick={ this.props.handleDelete }>Delete</button>
           { date }
-          { description }
           { categories }
+          { description }
           { amount }
         </li>
       </div>
