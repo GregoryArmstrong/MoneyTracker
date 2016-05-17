@@ -41,6 +41,7 @@ var UserShowBody = React.createClass({
     transactions.push(transaction);
 
     this.setState({ transactions: transactions });
+    $.getJSON('/api/v1/transactions/total.json', (response) => { this.setState({ transactionsTotal: response }) });
   },
 
   removeTransactionFromDOM(id) {
@@ -51,7 +52,6 @@ var UserShowBody = React.createClass({
       }
       return transaction.id != id;
     });
-
 
     this.setState({ transactions: newTransactions, transactionsTotal: newTransactionsTotal });
   },

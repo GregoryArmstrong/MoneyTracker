@@ -2,7 +2,7 @@ var UserShowTransactionsTotal = React.createClass({
   render(){
     return(
       <div>
-        { this.props.transactionsTotal / 100 }
+        <h1>{ this.props.transactionsTotal / 100 }</h1>
       </div>
     );
   }
