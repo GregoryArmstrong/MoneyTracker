@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get '/api/v1/transactions/entertainment', to: 'api/v1/transactions#entertainment'
   get '/api/v1/transactions/miscellaneous', to: 'api/v1/transactions#miscellaneous'
   get '/api/v1/transactions/income', to: 'api/v1/transactions#income'
+  get '/api/v1/transactions/daily_total', to: 'api/v1/transactions#daily_total'
 
   namespace :admin do
     resources :categories, only: [:index, :new, :create, :edit, :update, :destroy]

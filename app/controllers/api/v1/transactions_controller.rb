@@ -1,7 +1,7 @@
 class Api::V1::TransactionsController < Api::V1::BaseController
 
   def index
-    respond_with :api, :v1, Transaction.where(user_id: current_user.id)
+    respond_with :api, :v1, Transaction.where(user_id: current_user.id).order(:date)
   end
 
   def create
@@ -46,6 +46,10 @@ class Api::V1::TransactionsController < Api::V1::BaseController
 
   def income
     respond_with :api, :v1, Transaction.where(user_id: current_user.id).where(category_id: 6).sum(:amount)
+  end
+
+  def daily_total
+    respond_with Transaction.where(user_id: current_user.id).group_by_day(:date).sum(:amount)
   end
 
   private
