@@ -4,6 +4,11 @@ var UserShowNewTransaction = React.createClass({
     let amount         = this.refs.transactionAmount.value * 100;
     let category       = this.refs.transactionCategory.value;
     let date           = this.refs.transactionDate.value;
+    let debit          = this.refs.transactionDebit.checked;
+
+    if (debit) {
+      amount = amount * -1
+    }
 
     $.ajax({
       url: '/api/v1/transactions',
@@ -29,6 +34,7 @@ var UserShowNewTransaction = React.createClass({
           <option value='6'>Income</option>
         </select>
         <input ref='transactionDate' type='date' name='date' />
+        <input ref='transactionDebit' type='checkbox'><label>Debit?</label></input>
         <button onClick={ this.handleClick }>Submit</button>
       </div>
     );
