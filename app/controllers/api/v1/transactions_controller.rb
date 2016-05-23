@@ -24,8 +24,28 @@ class Api::V1::TransactionsController < Api::V1::BaseController
     respond_with Transaction.where(user_id: current_user.id).sum(:amount)
   end
 
+  def health
+    respond_with :api, :v1, Transaction.where(user_id: current_user.id).where(category_id: 1).sum(:amount) * -1
+  end
+
+  def food
+    respond_with :api, :v1, Transaction.where(user_id: current_user.id).where(category_id: 2).sum(:amount) * -1
+  end
+
+  def transportation
+    respond_with :api, :v1, Transaction.where(user_id: current_user.id).where(category_id: 3).sum(:amount) * -1
+  end
+
+  def entertainment
+    respond_with :api, :v1, Transaction.where(user_id: current_user.id).where(category_id: 4).sum(:amount) * -1
+  end
+
+  def miscellaneous
+    respond_with :api, :v1, Transaction.where(user_id: current_user.id).where(category_id: 5).sum(:amount) * -1
+  end
+
   def income
-    respond_with :api, :v1, Transaction.where(user_id: current_user.id).where(category_id: 6).average(:amount)
+    respond_with :api, :v1, Transaction.where(user_id: current_user.id).where(category_id: 6).sum(:amount)
   end
 
   private

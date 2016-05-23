@@ -7,7 +7,7 @@ var Chart = React.createClass({
         chart: {
           plotBackgroundColor: '#EFEFEF',
           height: 300,
-          type: 'bar'
+          type: 'bar',
         },
 
         series: data
