@@ -1,11 +1,12 @@
 var UserShowBody = React.createClass({
   getInitialState() {
-    return { transactions: [], transactionsTotal: 0 };
+    return { transactions: [], transactionsTotal: 0, income: 0 };
   },
 
   componentDidMount() {
     $.getJSON('/api/v1/transactions.json', (response) => { this.setState({ transactions: response }) });
     $.getJSON('/api/v1/transactions/total.json', (response) => { this.setState({ transactionsTotal: response }) });
+    $.getJSON('/api/v1/transactions/income.json', (response) => { this.setState({ income: parseInt(response) }) });
   },
 
   handleSubmit(transaction) {
@@ -68,7 +69,7 @@ var UserShowBody = React.createClass({
                                     />
         </ul>
         <UserShowTransactionsTotal transactionsTotal={ this.state.transactionsTotal }/>
-        <Chart data={ [1, 2, 3, 4] }/>
+        <Chart data={ [{name: 'Income', data: [ this.state.income / 100 ] }] }/>
       </div>
     );
   }

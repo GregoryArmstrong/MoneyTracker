@@ -19,6 +19,10 @@ var Chart = React.createClass({
     this.renderChart();
   },
 
+  componentDidUpdate() {
+    this.renderChart();
+  },
+
   render() {
     return (
       <div className='chart' ref='chartNode'></div>

@@ -24,6 +24,10 @@ class Api::V1::TransactionsController < Api::V1::BaseController
     respond_with Transaction.where(user_id: current_user.id).sum(:amount)
   end
 
+  def income
+    respond_with :api, :v1, Transaction.where(user_id: current_user.id).where(category_id: 6).average(:amount)
+  end
+
   private
 
   def transaction_params
