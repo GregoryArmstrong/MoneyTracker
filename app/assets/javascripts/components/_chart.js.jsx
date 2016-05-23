@@ -1,12 +1,13 @@
-var Chart = React.createClass({
+var UserShowCategoryTotalsChart = React.createClass({
   renderChart() {
-    var node = this.refs.chartNode.getDOMNode();
+    var node = this.refs.chartNode;
     var data = this.props.data;
     jQuery(function ($) {
       $(node).highcharts({
         chart: {
           plotBackgroundColor: '#EFEFEF',
           height: 300,
+          width: 600,
           type: 'bar',
         },
         title: {
