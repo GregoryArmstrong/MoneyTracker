@@ -68,6 +68,7 @@ var UserShowBody = React.createClass({
                                     />
         </ul>
         <UserShowTransactionsTotal transactionsTotal={ this.state.transactionsTotal }/>
+        <Chart data={ [1, 2, 3, 4] }/>
       </div>
     );
   }

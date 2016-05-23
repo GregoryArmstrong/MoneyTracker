@@ -1,12 +1,12 @@
 var UserShowNewTransaction = React.createClass({
   handleClick() {
     let description    = this.refs.transactionDescription.value;
-    let amount         = this.refs.transactionAmount.value * 100;
+    let amount         = ( this.refs.transactionAmount.value * 100 * -1 );
     let category       = this.refs.transactionCategory.value;
     let date           = this.refs.transactionDate.value;
-    let debit          = this.refs.transactionDebit.checked;
+    let deposit        = this.refs.transactionDeposit.checked;
 
-    if (debit) {
+    if (deposit) {
       amount = amount * -1
     }
 
@@ -34,7 +34,7 @@ var UserShowNewTransaction = React.createClass({
           <option value='6'>Income</option>
         </select>
         <input ref='transactionDate' type='date' name='date' />
-        <input ref='transactionDebit' type='checkbox'><label>Debit?</label></input>
+        <input ref='transactionDeposit' type='checkbox'><label>Deposit?</label></input>
         <button onClick={ this.handleClick }>Submit</button>
       </div>
     );
