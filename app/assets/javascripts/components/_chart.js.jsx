@@ -9,7 +9,9 @@ var Chart = React.createClass({
           height: 300,
           type: 'bar',
         },
-
+        title: {
+          text: 'Summed Transactions'
+        },
         series: data
       });
     });

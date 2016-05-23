@@ -80,13 +80,6 @@ var UserShowBody = React.createClass({
       <div className='user-show-body'>
         <Header pageTitle='All Transactions' />
         <UserShowNewTransaction handleSubmit={ this.handleSubmit } user={ this.props.user }/>
-        <ul>
-          <UserShowAllTransactions  transactions={ this.state.transactions }
-                                    handleDelete={ this.handleDelete }
-                                    onUpdate={ this.handleUpdate }
-                                    />
-        </ul>
-        <UserShowTransactionsTotal transactionsTotal={ this.state.transactionsTotal }/>
         <Chart data={ [ {name: 'Income', data: [ this.state.income / 100 ] },
                         {name: 'Health', data: [ this.state.health / 100 ] },
                         {name: 'Food', data: [ this.state.food / 100 ] },
@@ -94,6 +87,14 @@ var UserShowBody = React.createClass({
                         {name: 'Entertainment', data: [ this.state.entertainment / 100 ] },
                         {name: 'Miscellaneous', data: [ this.state.miscellaneous / 100 ] }
                       ] }/>
+        <ul>
+          <UserShowAllTransactions  transactions={ this.state.transactions }
+                                    handleDelete={ this.handleDelete }
+                                    onUpdate={ this.handleUpdate }
+                                    />
+        </ul>
+        <UserShowTransactionsTotal transactionsTotal={ this.state.transactionsTotal }/>
+
       </div>
     );
   }
