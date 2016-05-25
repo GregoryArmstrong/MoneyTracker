@@ -58,8 +58,9 @@ li {
 }
 
 .transactions-total {
-  position: absolute;
-  right: 0px;
+  position: relative;
+  float: right;
+  margin: 15px;
 }
 
 .new-transaction {

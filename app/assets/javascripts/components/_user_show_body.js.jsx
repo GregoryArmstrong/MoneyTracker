@@ -32,12 +32,8 @@ var UserShowBody = React.createClass({
     $.getJSON('/api/v1/transactions/daily_total.json', (response) => { this.setState({ daily_total: this.formatDateTime(response)}) });
   },
 
-  handleSubmit(transaction) {
-    let newTransactionsState = this.state.transactions.concat(transaction);
-    let newTransactionsTotalState = this.state.transactionsTotal + transaction.amount;
-
-    this.getDailyTotal();
-    this.setState({ transactions: newTransactionsState, transactionsTotal: newTransactionsTotalState });
+  handleSubmit() {
+    this.getUpdatedState();
   },
 
   handleUpdate(transaction) {
@@ -128,8 +124,6 @@ var UserShowBody = React.createClass({
                                               ] }/>
         </div>
         <UserShowTransactionsTotal transactionsTotal={ this.state.transactionsTotal }/>
-        <br />
-        <br />
         <ul>
           <UserShowAllTransactions  transactions={ this.state.transactions }
                                     handleDelete={ this.handleDelete }

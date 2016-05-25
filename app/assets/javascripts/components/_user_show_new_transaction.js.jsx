@@ -15,7 +15,7 @@ var UserShowNewTransaction = React.createClass({
       type: 'POST',
       data: { transaction: { description: description, amount: amount, category_id: category, date: date }},
       success: (transaction) => {
-        this.props.handleSubmit(transaction);
+        this.props.handleSubmit();
       }
     });
   },

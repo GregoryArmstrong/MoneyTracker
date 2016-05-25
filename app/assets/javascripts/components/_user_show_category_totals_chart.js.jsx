@@ -13,6 +13,22 @@ var UserShowCategoryTotalsChart = React.createClass({
         title: {
           text: 'Summed Transactions by Category'
         },
+        dataLabels: {
+          enabled: true
+        },
+        xAxis: {
+          labels: {
+            format: 'Categories'
+          },
+        },
+        yAxis: {
+          labels: {
+            format: '$ {value}'
+          },
+          title: {
+            text: 'Total Amount'
+          }
+        },
         series: data
       });
     });
