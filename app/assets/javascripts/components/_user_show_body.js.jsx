@@ -7,10 +7,20 @@ var UserShowBody = React.createClass({
               transportation: 0,
               entertainment: 0,
               miscellaneous: 0,
-              income: 0 };
+              income: 0,
+              daily_total: {}
+            };
   },
 
   componentDidMount() {
+    this.getUpdatedState();
+  },
+
+  getDailyTotal(){
+    $.getJSON('/api/v1/transactions/daily_total.json', (response) => { this.setState({ daily_total: response}) });
+  },
+
+  getUpdatedState(){
     $.getJSON('/api/v1/transactions.json', (response) => { this.setState({ transactions: response }) });
     $.getJSON('/api/v1/transactions/total.json', (response) => { this.setState({ transactionsTotal: response }) });
     $.getJSON('/api/v1/transactions/health.json', (response) => { this.setState({ health: parseInt(response) }) });
@@ -19,13 +29,11 @@ var UserShowBody = React.createClass({
     $.getJSON('/api/v1/transactions/entertainment.json', (response) => { this.setState({ entertainment: parseInt(response) }) });
     $.getJSON('/api/v1/transactions/miscellaneous.json', (response) => { this.setState({ miscellaneous: parseInt(response) }) });
     $.getJSON('/api/v1/transactions/income.json', (response) => { this.setState({ income: parseInt(response) }) });
+    $.getJSON('/api/v1/transactions/daily_total.json', (response) => { this.setState({ daily_total: this.formatDateTime(response)}) });
   },
 
-  handleSubmit(transaction) {
-    let newTransactionsState = this.state.transactions.concat(transaction);
-    let newTransactionsTotalState = this.state.transactionsTotal + transaction.amount;
-
-    this.setState({ transactions: newTransactionsState, transactionsTotal: newTransactionsTotalState });
+  handleSubmit() {
+    this.getUpdatedState();
   },
 
   handleUpdate(transaction) {
@@ -34,7 +42,8 @@ var UserShowBody = React.createClass({
       type: 'PUT',
       data: { transaction: transaction },
       success: (transaction) => {
-        this.updateTransactions(transaction)
+        this.updateTransactions(transaction);
+        this.getUpdatedState();
       }
     });
   },
@@ -45,6 +54,7 @@ var UserShowBody = React.createClass({
       type: 'DELETE',
       success: () => {
         this.removeTransactionFromDOM(id);
+        this.getUpdatedState();
       }
     });
   },
@@ -54,13 +64,6 @@ var UserShowBody = React.createClass({
     transactions.push(transaction);
 
     this.setState({ transactions: transactions });
-    $.getJSON('/api/v1/transactions/total.json', (response) => { this.setState({ transactionsTotal: response }) });
-    $.getJSON('/api/v1/transactions/health.json', (response) => { this.setState({ health: parseInt(response) }) });
-    $.getJSON('/api/v1/transactions/food.json', (response) => { this.setState({ food: parseInt(response) }) });
-    $.getJSON('/api/v1/transactions/transportation.json', (response) => { this.setState({ transportation: parseInt(response) }) });
-    $.getJSON('/api/v1/transactions/entertainment.json', (response) => { this.setState({ entertainment: parseInt(response) }) });
-    $.getJSON('/api/v1/transactions/miscellaneous.json', (response) => { this.setState({ miscellaneous: parseInt(response) }) });
-    $.getJSON('/api/v1/transactions/income.json', (response) => { this.setState({ income: parseInt(response) }) });
   },
 
   removeTransactionFromDOM(id) {
@@ -75,26 +78,58 @@ var UserShowBody = React.createClass({
     this.setState({ transactions: newTransactions, transactionsTotal: newTransactionsTotal });
   },
 
+  formatDailyTotals(){
+    daily_totals = {
+                      name: 'Daily Total',
+                      data: []
+                    };
+    var daily_total = this.state.daily_total;
+    var xAxisCategories = [];
+    var keys = Object.keys(daily_total);
+    keys.forEach( function(key, index, array) {
+      if (index === 0) {
+        daily_totals.data.push( { name: key, y: (daily_total[key] / 100) } )
+        xAxisCategories.push(key);
+      } else {
+        daily_totals.data.push( { name: key, y: ((daily_total[key] / 100) + daily_totals.data[index - 1].y) } );
+        xAxisCategories.push(key);
+      }
+    });
+    return { dailyTotals: [daily_totals], xAxisCategories: xAxisCategories };
+  },
+
+  formatDateTime(dailyTotal){
+    var newDailyTotal = {};
+    var dailyTotalKeys = Object.keys(dailyTotal);
+    dailyTotalKeys.forEach( function(key) {
+      let newSplitKey = key.split(' ');
+      newDailyTotal[newSplitKey[0]] = dailyTotal[key];
+    });
+    return newDailyTotal;
+  },
+
   render() {
     return (
       <div className='user-show-body'>
         <Header pageTitle='All Transactions' />
         <UserShowNewTransaction handleSubmit={ this.handleSubmit } user={ this.props.user }/>
-        <Chart data={ [ {name: 'Income', data: [ this.state.income / 100 ] },
-                        {name: 'Health', data: [ this.state.health / 100 ] },
-                        {name: 'Food', data: [ this.state.food / 100 ] },
-                        {name: 'Transportation', data: [ this.state.transportation / 100 ] },
-                        {name: 'Entertainment', data: [ this.state.entertainment / 100 ] },
-                        {name: 'Miscellaneous', data: [ this.state.miscellaneous / 100 ] }
-                      ] }/>
+        <div id='chart-container'>
+          <UserShowTransactionsDailyTotalChart data={ this.formatDailyTotals() }/>
+          <UserShowCategoryTotalsChart data={ [ {name: 'Income',          data: [ this.state.income / 100 ] },
+                                                {name: 'Health',          data: [ this.state.health / 100 ] },
+                                                {name: 'Food',            data: [ this.state.food / 100 ] },
+                                                {name: 'Transportation',  data: [ this.state.transportation / 100 ] },
+                                                {name: 'Entertainment',   data: [ this.state.entertainment / 100 ] },
+                                                {name: 'Miscellaneous',   data: [ this.state.miscellaneous / 100 ] }
+                                              ] }/>
+        </div>
+        <UserShowTransactionsTotal transactionsTotal={ this.state.transactionsTotal }/>
         <ul>
           <UserShowAllTransactions  transactions={ this.state.transactions }
                                     handleDelete={ this.handleDelete }
                                     onUpdate={ this.handleUpdate }
                                     />
         </ul>
-        <UserShowTransactionsTotal transactionsTotal={ this.state.transactionsTotal }/>
-
       </div>
     );
   }
