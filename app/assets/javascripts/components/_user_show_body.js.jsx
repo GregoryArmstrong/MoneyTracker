@@ -29,7 +29,7 @@ var UserShowBody = React.createClass({
     $.getJSON('/api/v1/transactions/entertainment.json', (response) => { this.setState({ entertainment: parseInt(response) }) });
     $.getJSON('/api/v1/transactions/miscellaneous.json', (response) => { this.setState({ miscellaneous: parseInt(response) }) });
     $.getJSON('/api/v1/transactions/income.json', (response) => { this.setState({ income: parseInt(response) }) });
-    $.getJSON('/api/v1/transactions/daily_total.json', (response) => { this.setState({ daily_total: response}) });
+    $.getJSON('/api/v1/transactions/daily_total.json', (response) => { this.setState({ daily_total: this.formatDateTime(response)}) });
   },
 
   handleSubmit(transaction) {
@@ -68,14 +68,6 @@ var UserShowBody = React.createClass({
     transactions.push(transaction);
 
     this.setState({ transactions: transactions });
-    // $.getJSON('/api/v1/transactions/total.json', (response) => { this.setState({ transactionsTotal: response }) });
-    // $.getJSON('/api/v1/transactions/health.json', (response) => { this.setState({ health: parseInt(response) }) });
-    // $.getJSON('/api/v1/transactions/food.json', (response) => { this.setState({ food: parseInt(response) }) });
-    // $.getJSON('/api/v1/transactions/transportation.json', (response) => { this.setState({ transportation: parseInt(response) }) });
-    // $.getJSON('/api/v1/transactions/entertainment.json', (response) => { this.setState({ entertainment: parseInt(response) }) });
-    // $.getJSON('/api/v1/transactions/miscellaneous.json', (response) => { this.setState({ miscellaneous: parseInt(response) }) });
-    // $.getJSON('/api/v1/transactions/income.json', (response) => { this.setState({ income: parseInt(response) }) });
-    // $.getJSON('/api/v1/transactions/daily_total.json', (response) => { this.setState({ daily_total: response}) });
   },
 
   removeTransactionFromDOM(id) {
@@ -90,7 +82,7 @@ var UserShowBody = React.createClass({
     this.setState({ transactions: newTransactions, transactionsTotal: newTransactionsTotal });
   },
 
-  format_daily_totals(){
+  formatDailyTotals(){
     daily_totals = {
                       name: 'Daily Total',
                       data: []
@@ -110,19 +102,31 @@ var UserShowBody = React.createClass({
     return { dailyTotals: [daily_totals], xAxisCategories: xAxisCategories };
   },
 
+  formatDateTime(dailyTotal){
+    var newDailyTotal = {};
+    var dailyTotalKeys = Object.keys(dailyTotal);
+    dailyTotalKeys.forEach( function(key) {
+      let newSplitKey = key.split(' ');
+      newDailyTotal[newSplitKey[0]] = dailyTotal[key];
+    });
+    return newDailyTotal;
+  },
+
   render() {
     return (
       <div className='user-show-body'>
         <Header pageTitle='All Transactions' />
         <UserShowNewTransaction handleSubmit={ this.handleSubmit } user={ this.props.user }/>
-        <UserShowTransactionsDailyTotalChart data={ this.format_daily_totals() }/>
-        <UserShowCategoryTotalsChart data={ [ {name: 'Income',          data: [ this.state.income / 100 ] },
-                                              {name: 'Health',          data: [ this.state.health / 100 ] },
-                                              {name: 'Food',            data: [ this.state.food / 100 ] },
-                                              {name: 'Transportation',  data: [ this.state.transportation / 100 ] },
-                                              {name: 'Entertainment',   data: [ this.state.entertainment / 100 ] },
-                                              {name: 'Miscellaneous',   data: [ this.state.miscellaneous / 100 ] }
-                                            ] }/>
+        <div id='chart-container'>
+          <UserShowTransactionsDailyTotalChart data={ this.formatDailyTotals() }/>
+          <UserShowCategoryTotalsChart data={ [ {name: 'Income',          data: [ this.state.income / 100 ] },
+                                                {name: 'Health',          data: [ this.state.health / 100 ] },
+                                                {name: 'Food',            data: [ this.state.food / 100 ] },
+                                                {name: 'Transportation',  data: [ this.state.transportation / 100 ] },
+                                                {name: 'Entertainment',   data: [ this.state.entertainment / 100 ] },
+                                                {name: 'Miscellaneous',   data: [ this.state.miscellaneous / 100 ] }
+                                              ] }/>
+        </div>
         <UserShowTransactionsTotal transactionsTotal={ this.state.transactionsTotal }/>
         <br />
         <br />

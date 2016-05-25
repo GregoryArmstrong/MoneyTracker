@@ -6,15 +6,23 @@ var UserShowTransactionsDailyTotalChart = React.createClass({
       $(node).highcharts({
         chart: {
           plotBackgroundColor: '#EFEFEF',
-          height: 300,
-          width: 600,
+          height: 600,
+          width: 750,
           type: 'line',
         },
         title: {
-          text: 'Daily Transaction Total'
+          text: 'Daily Transaction Totals'
         },
         xAxis: {
           categories: data.xAxisCategories
+        },
+        yAxis: {
+          labels: {
+            format: '$ {value}',
+          },
+          title: {
+            text: 'Total Amount'
+          }
         },
         series: data.dailyTotals
       });

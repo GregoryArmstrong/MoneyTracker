@@ -6,12 +6,12 @@ var UserShowCategoryTotalsChart = React.createClass({
       $(node).highcharts({
         chart: {
           plotBackgroundColor: '#EFEFEF',
-          height: 300,
-          width: 600,
+          height: 600,
+          width: 750,
           type: 'bar',
         },
         title: {
-          text: 'Summed Transactions'
+          text: 'Summed Transactions by Category'
         },
         series: data
       });
