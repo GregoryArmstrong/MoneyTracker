@@ -68,14 +68,14 @@ var UserShowBody = React.createClass({
     transactions.push(transaction);
 
     this.setState({ transactions: transactions });
-    $.getJSON('/api/v1/transactions/total.json', (response) => { this.setState({ transactionsTotal: response }) });
-    $.getJSON('/api/v1/transactions/health.json', (response) => { this.setState({ health: parseInt(response) }) });
-    $.getJSON('/api/v1/transactions/food.json', (response) => { this.setState({ food: parseInt(response) }) });
-    $.getJSON('/api/v1/transactions/transportation.json', (response) => { this.setState({ transportation: parseInt(response) }) });
-    $.getJSON('/api/v1/transactions/entertainment.json', (response) => { this.setState({ entertainment: parseInt(response) }) });
-    $.getJSON('/api/v1/transactions/miscellaneous.json', (response) => { this.setState({ miscellaneous: parseInt(response) }) });
-    $.getJSON('/api/v1/transactions/income.json', (response) => { this.setState({ income: parseInt(response) }) });
-    $.getJSON('/api/v1/transactions/daily_total.json', (response) => { this.setState({ daily_total: response}) });
+    // $.getJSON('/api/v1/transactions/total.json', (response) => { this.setState({ transactionsTotal: response }) });
+    // $.getJSON('/api/v1/transactions/health.json', (response) => { this.setState({ health: parseInt(response) }) });
+    // $.getJSON('/api/v1/transactions/food.json', (response) => { this.setState({ food: parseInt(response) }) });
+    // $.getJSON('/api/v1/transactions/transportation.json', (response) => { this.setState({ transportation: parseInt(response) }) });
+    // $.getJSON('/api/v1/transactions/entertainment.json', (response) => { this.setState({ entertainment: parseInt(response) }) });
+    // $.getJSON('/api/v1/transactions/miscellaneous.json', (response) => { this.setState({ miscellaneous: parseInt(response) }) });
+    // $.getJSON('/api/v1/transactions/income.json', (response) => { this.setState({ income: parseInt(response) }) });
+    // $.getJSON('/api/v1/transactions/daily_total.json', (response) => { this.setState({ daily_total: response}) });
   },
 
   removeTransactionFromDOM(id) {
@@ -91,17 +91,23 @@ var UserShowBody = React.createClass({
   },
 
   format_daily_totals(){
-    daily_totals = { name: 'Daily Total', data: [] };
-    var daily_total = this.state.daily_total
+    daily_totals = {
+                      name: 'Daily Total',
+                      data: []
+                    };
+    var daily_total = this.state.daily_total;
+    var xAxisCategories = [];
     var keys = Object.keys(daily_total);
     keys.forEach( function(key, index, array) {
       if (index === 0) {
-        daily_totals['data'].push(daily_total[key] / 100);
+        daily_totals.data.push( { name: key, y: (daily_total[key] / 100) } )
+        xAxisCategories.push(key);
       } else {
-        daily_totals['data'].push((daily_total[key] / 100) + daily_totals['data'][index - 1])
+        daily_totals.data.push( { name: key, y: ((daily_total[key] / 100) + daily_totals.data[index - 1].y) } );
+        xAxisCategories.push(key);
       }
     });
-    return [daily_totals]
+    return { dailyTotals: [daily_totals], xAxisCategories: xAxisCategories };
   },
 
   render() {
@@ -117,13 +123,15 @@ var UserShowBody = React.createClass({
                                               {name: 'Entertainment',   data: [ this.state.entertainment / 100 ] },
                                               {name: 'Miscellaneous',   data: [ this.state.miscellaneous / 100 ] }
                                             ] }/>
+        <UserShowTransactionsTotal transactionsTotal={ this.state.transactionsTotal }/>
+        <br />
+        <br />
         <ul>
           <UserShowAllTransactions  transactions={ this.state.transactions }
                                     handleDelete={ this.handleDelete }
                                     onUpdate={ this.handleUpdate }
                                     />
         </ul>
-        <UserShowTransactionsTotal transactionsTotal={ this.state.transactionsTotal }/>
       </div>
     );
   }

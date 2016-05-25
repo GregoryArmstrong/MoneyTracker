@@ -1,7 +1,7 @@
 class Api::V1::TransactionsController < Api::V1::BaseController
 
   def index
-    respond_with :api, :v1, Transaction.where(user_id: current_user.id).order(:date)
+    respond_with :api, :v1, Transaction.where(user_id: current_user.id).order(date: :desc)
   end
 
   def create

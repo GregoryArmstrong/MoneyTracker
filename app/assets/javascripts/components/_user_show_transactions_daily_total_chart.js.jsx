@@ -11,9 +11,12 @@ var UserShowTransactionsDailyTotalChart = React.createClass({
           type: 'line',
         },
         title: {
-          text: 'Test'
+          text: 'Daily Transaction Total'
         },
-        series: data
+        xAxis: {
+          categories: data.xAxisCategories
+        },
+        series: data.dailyTotals
       });
     });
   },
