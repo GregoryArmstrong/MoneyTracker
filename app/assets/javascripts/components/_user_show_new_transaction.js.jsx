@@ -33,10 +33,6 @@ var UserShowNewTransaction = React.createClass({
           <option value='6'>Income</option>
         </select>
         <input ref='transactionDate' type='date' name='date' />
-        {/*<label>
-          <input ref='transactionDeposit' type='checkbox' />
-          Deposit?
-        </label>*/}
         <button onClick={ this.handleClick }>Submit</button>
       </div>
     );

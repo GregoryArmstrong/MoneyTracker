@@ -1,6 +1,7 @@
 var UserShowBody = React.createClass({
   getInitialState() {
-    return {  transactions: [],
+    return {
+              transactions: [],
               transactionsTotal: 0,
               health: 0,
               food: 0,

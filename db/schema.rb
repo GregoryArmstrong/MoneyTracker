@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160510212736) do
+ActiveRecord::Schema.define(version: 20160526210404) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,18 @@ ActiveRecord::Schema.define(version: 20160510212736) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "monthly_expenditures", force: :cascade do |t|
+    t.integer  "amount"
+    t.string   "month"
+    t.integer  "user_id"
+    t.integer  "category_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "monthly_expenditures", ["category_id"], name: "index_monthly_expenditures_on_category_id", using: :btree
+  add_index "monthly_expenditures", ["user_id"], name: "index_monthly_expenditures_on_user_id", using: :btree
 
   create_table "transactions", force: :cascade do |t|
     t.integer  "amount",      null: false
@@ -43,6 +55,8 @@ ActiveRecord::Schema.define(version: 20160510212736) do
     t.integer  "role",            default: 0
   end
 
+  add_foreign_key "monthly_expenditures", "categories"
+  add_foreign_key "monthly_expenditures", "users"
   add_foreign_key "transactions", "categories"
   add_foreign_key "transactions", "users"
 end

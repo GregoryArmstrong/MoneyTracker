@@ -63,13 +63,13 @@ li {
   margin: 15px;
 }
 
-.new-transaction {
+.new-transaction, .new-monthly-expenditure {
   padding: 10px;
   margin: auto;
   position: relative;
 }
 
-.user-show-body {
+.user-show-body, .monthly-transactions-index-body {
   display: flex;
   flex-direction: column;
   justify-content: center;
