@@ -5,11 +5,13 @@ var Transaction = React.createClass({
 
   onUpdate() {
     if (this.state.editable) {
-      let transaction = { id: this.props.transaction.id,
+      let transaction = {
+                          id: this.props.transaction.id,
                           description: this.refs.description.value,
                           amount: this.refs.amount.value * 100,
                           category_id: this.refs.editableTransactionCategory.value,
-                          date: this.refs.transactionDate.value }
+                          date: this.refs.transactionDate.value
+                        }
 
       this.props.handleUpdate(transaction);
     }

@@ -22,7 +22,7 @@ li {
   display: inline-flex;
 }
 
-.all-transactions {
+.all-transactions, .all-monthly-expenditures {
   display: flex;
   flex-direction: column;
 }
@@ -43,7 +43,7 @@ li {
   justify-content: center;
 }
 
-.transaction {
+.transaction, .monthly-expenditure {
   padding: 5px;
   margin: -2px;
   background-color: #3B8686;

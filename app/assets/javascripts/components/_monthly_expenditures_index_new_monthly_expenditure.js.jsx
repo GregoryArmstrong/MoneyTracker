@@ -7,7 +7,7 @@ var MonthlyExpendituresIndexNewMonthlyExpenditure = React.createClass({
     $.ajax({
       url: '/api/v1/monthly_expenditures',
       type: 'POST',
-      data: { monthlyExpenditure: { month: month, amount: amount, category_id: category }},
+      data: { monthly_expenditure: { month: month, amount: amount, category_id: category }},
       success: (monthlyExpenditure) => {
         this.props.handleSubmit(monthlyExpenditure);
       }
