@@ -114,7 +114,7 @@ var UserShowBody = React.createClass({
         <Header pageTitle='All Transactions' />
         <UserShowNewTransaction handleSubmit={ this.handleSubmit } user={ this.props.user }/>
         <div id='chart-container'>
-          <UserShowTransactionsDailyTotalChart data={ this.formatDailyTotals() }/>
+          <UserShowTransactionsDailyTotalChart data={ this.formatDailyTotals() } title='All Daily Transaction Totals'/>
           <UserShowCategoryTotalsChart data={ [ {name: 'Income',          data: [ this.state.income / 100 ] },
                                                 {name: 'Health',          data: [ this.state.health / 100 ] },
                                                 {name: 'Food',            data: [ this.state.food / 100 ] },

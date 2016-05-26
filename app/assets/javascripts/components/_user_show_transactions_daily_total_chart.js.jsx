@@ -2,6 +2,7 @@ var UserShowTransactionsDailyTotalChart = React.createClass({
   renderChart() {
     var node = this.refs.chartNode2;
     var data = this.props.data;
+    var title = this.props.title;
     jQuery(function ($) {
       $(node).highcharts({
         chart: {
@@ -11,7 +12,7 @@ var UserShowTransactionsDailyTotalChart = React.createClass({
           type: 'line',
         },
         title: {
-          text: 'Daily Transaction Totals'
+          text: title
         },
         xAxis: {
           categories: data.xAxisCategories
