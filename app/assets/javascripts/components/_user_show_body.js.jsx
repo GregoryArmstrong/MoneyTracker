@@ -80,7 +80,7 @@ var UserShowBody = React.createClass({
   },
 
   formatDailyTotals(){
-    daily_totals = {
+    var daily_totals = {
                       name: 'Daily Total',
                       data: []
                     };
@@ -89,7 +89,7 @@ var UserShowBody = React.createClass({
     var keys = Object.keys(daily_total);
     keys.forEach( function(key, index, array) {
       if (index === 0) {
-        daily_totals.data.push( { name: key, y: (daily_total[key] / 100) } )
+        daily_totals.data.push( { name: key, y: (daily_total[key] / 100) } );
         xAxisCategories.push(key);
       } else {
         daily_totals.data.push( { name: key, y: ((daily_total[key] / 100) + daily_totals.data[index - 1].y) } );

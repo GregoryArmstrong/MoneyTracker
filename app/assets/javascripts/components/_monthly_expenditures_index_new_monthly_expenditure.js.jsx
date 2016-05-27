@@ -1,8 +1,12 @@
 var MonthlyExpendituresIndexNewMonthlyExpenditure = React.createClass({
   handleClick(){
     let month           = this.refs.monthlyExpenditureMonth.value;
-    let amount          = this.refs.monthlyExpenditureAmount.value * 100;
+    let amount          = this.refs.monthlyExpenditureAmount.value * 100 * -1;
     let category        = this.refs.monthlyExpenditureCategory.value;
+
+    if (category == 6) {
+      amount = amount * -1;
+    }
 
     $.ajax({
       url: '/api/v1/monthly_expenditures',

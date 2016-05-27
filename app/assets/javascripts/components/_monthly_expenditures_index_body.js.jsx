@@ -1,20 +1,39 @@
 var MonthlyExpendituresIndexBody = React.createClass({
   getInitialState() {
     return {
-              monthlyExpenditures: []
+              monthlyExpenditures: [],
+              monthlyTotals: {}
             };
   },
 
   componentDidMount() {
     $.getJSON('/api/v1/monthly_expenditures.json', (response) => { this.setState({ monthlyExpenditures: response }) });
-    console.log(this.state.monthlyExpenditures);
+    $.getJSON('/api/v1/monthly_expenditures/monthly_totals.json', (response) => { this.formatMonthlyTotals(response) } );
+  },
+
+  formatMonthlyTotals(monthlyTotals) {
+    var newMonthlyTotals = {
+                      name: 'Monthly Total',
+                      data: []
+                    };
+    var xAxisCategories = [];
+    monthlyTotals.forEach( function(month, index, array) {
+      if (index === 0) {
+        newMonthlyTotals.data.push( { name: month[0], y: (month[1] / 100) });
+        xAxisCategories.push(month[0]);
+      } else {
+        newMonthlyTotals.data.push( { name: month[0], y: ((month[1] / 100) + newMonthlyTotals.data[index - 1].y) });
+        xAxisCategories.push(month[0]);
+      }
+    });
+    this.setState({ monthlyTotals: [newMonthlyTotals] });
+    this.setState({ xAxisCategories: xAxisCategories });
   },
 
   handleSubmit(monthlyExpenditure){
     var newMonthlyExpenditures = this.state.monthlyExpenditures.concat(monthlyExpenditure)
 
     this.setState({ monthlyExpenditures: newMonthlyExpenditures });
-    console.log(this.state);
   },
 
   updateMonthlyExpenditures(monthlyExpenditure) {
@@ -58,6 +77,7 @@ var MonthlyExpendituresIndexBody = React.createClass({
       <div className='monthly-transactions-index-body'>
         <Header pageTitle='Monthly Planning' />
         <MonthlyExpendituresIndexNewMonthlyExpenditure handleSubmit={ this.handleSubmit } />
+        <MonthlyExpendituresMonthlyTotalsChart data={ this.state.monthlyTotals } xAxisCategories={this.state.xAxisCategories} title='Monthly Expenditures' />
         <ul>
           <MonthlyExpendituresIndexAllMonthlyExpenditures monthlyExpenditures={ this.state.monthlyExpenditures }
                                                           handleDelete={ this.handleDelete }
