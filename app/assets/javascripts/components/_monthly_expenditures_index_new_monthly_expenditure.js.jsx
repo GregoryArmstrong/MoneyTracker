@@ -37,12 +37,16 @@ var MonthlyExpendituresIndexNewMonthlyExpenditure = React.createClass({
         </select>
         <input ref='monthlyExpenditureAmount' placeholder='Amount' />
         <select ref='monthlyExpenditureCategory'>
-          <option value='1'>Health</option>
+          <option value='1'>Health Insurance</option>
           <option value='2'>Food</option>
-          <option value='3'>Transportation</option>
-          <option value='4'>Entertainment</option>
+          <option value='3'>Car Payment</option>
+          <option value='4'>Car Insurance</option>
           <option value='5'>Miscellaneous</option>
           <option value='6'>Income</option>
+          <option value='7'>Rent</option>
+          <option value='8'>Loan Payment</option>
+          <option value='9'>Utilities</option>
+          <option value='10'>Phone</option>
         </select>
         <button onClick={ this.handleClick }>Submit</button>
       </div>

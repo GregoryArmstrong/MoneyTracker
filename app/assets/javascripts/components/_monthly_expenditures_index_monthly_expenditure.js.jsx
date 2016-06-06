@@ -20,12 +20,16 @@ var MonthlyExpenditure = React.createClass({
 
   render(){
     const categoryNames = {
-                            1: 'Health',
+                            1: 'Health Insurance',
                             2: 'Food',
-                            3: 'Transportation',
-                            4: 'Entertainment',
+                            3: 'Car Payment',
+                            4: 'Car Insurance',
                             5: 'Miscellaneous',
-                            6: 'Income'
+                            6: 'Income',
+                            7: 'Rent',
+                            8: 'Loan Payment',
+                            9: 'Utilities',
+                            10: 'Phone'
                           };
     const monthNames = {
                           1: 'January',
