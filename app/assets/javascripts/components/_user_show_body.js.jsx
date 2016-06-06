@@ -3,12 +3,15 @@ var UserShowBody = React.createClass({
     return {
               transactions: [],
               transactionsTotal: 0,
-              health: 0,
+              healthInsurance: 0,
               food: 0,
-              transportation: 0,
-              entertainment: 0,
+              carPayment: 0,
+              carInsurance: 0,
               miscellaneous: 0,
               income: 0,
+              loanPayment: 0,
+              utilities: 0,
+              phone: 0,
               daily_total: {}
             };
   },
@@ -24,12 +27,16 @@ var UserShowBody = React.createClass({
   getUpdatedState(){
     $.getJSON('/api/v1/transactions.json', (response) => { this.setState({ transactions: response }) });
     $.getJSON('/api/v1/transactions/total.json', (response) => { this.setState({ transactionsTotal: response }) });
-    $.getJSON('/api/v1/transactions/health.json', (response) => { this.setState({ health: parseInt(response) }) });
+    $.getJSON('/api/v1/transactions/health_insurance.json', (response) => { this.setState({ healthInsurance: parseInt(response) }) });
     $.getJSON('/api/v1/transactions/food.json', (response) => { this.setState({ food: parseInt(response) }) });
-    $.getJSON('/api/v1/transactions/transportation.json', (response) => { this.setState({ transportation: parseInt(response) }) });
-    $.getJSON('/api/v1/transactions/entertainment.json', (response) => { this.setState({ entertainment: parseInt(response) }) });
+    $.getJSON('/api/v1/transactions/car_payment.json', (response) => { this.setState({ carPayment: parseInt(response) }) });
+    $.getJSON('/api/v1/transactions/car_insurance.json', (response) => { this.setState({ carInsurance: parseInt(response) }) });
     $.getJSON('/api/v1/transactions/miscellaneous.json', (response) => { this.setState({ miscellaneous: parseInt(response) }) });
     $.getJSON('/api/v1/transactions/income.json', (response) => { this.setState({ income: parseInt(response) }) });
+    $.getJSON('/api/v1/transactions/rent.json', (response) => { this.setState({ rent: parseInt(response) }) });
+    $.getJSON('/api/v1/transactions/loan_payment.json', (response) => { this.setState({ loanPayment: parseInt(response) }) });
+    $.getJSON('/api/v1/transactions/utilities.json', (response) => { this.setState({ utilities: parseInt(response) }) });
+    $.getJSON('/api/v1/transactions/phone.json', (response) => { this.setState({ phone: parseInt(response) }) });
     $.getJSON('/api/v1/transactions/daily_total.json', (response) => { this.setState({ daily_total: this.formatDateTime(response)}) });
   },
 
@@ -116,12 +123,15 @@ var UserShowBody = React.createClass({
         <UserShowNewTransaction handleSubmit={ this.handleSubmit } user={ this.props.user }/>
         <div id='chart-container'>
           <UserShowTransactionsDailyTotalChart data={ this.formatDailyTotals() } title='All Daily Transaction Totals'/>
-          <UserShowCategoryTotalsChart data={ [ {name: 'Income',          data: [ this.state.income / 100 ] },
-                                                {name: 'Health',          data: [ this.state.health / 100 ] },
-                                                {name: 'Food',            data: [ this.state.food / 100 ] },
-                                                {name: 'Transportation',  data: [ this.state.transportation / 100 ] },
-                                                {name: 'Entertainment',   data: [ this.state.entertainment / 100 ] },
-                                                {name: 'Miscellaneous',   data: [ this.state.miscellaneous / 100 ] }
+          <UserShowCategoryTotalsChart data={ [ {name: 'Income',            data: [ this.state.income / 100 ] },
+                                                {name: 'Health Insurance',  data: [ this.state.healthInsurance / 100 ] },
+                                                {name: 'Food',              data: [ this.state.food / 100 ] },
+                                                {name: 'Car Payment',       data: [ this.state.carPayment / 100 ] },
+                                                {name: 'Car Insurance',     data: [ this.state.carInsurance / 100 ] },
+                                                {name: 'Miscellaneous',     data: [ this.state.miscellaneous / 100 ] },
+                                                {name: 'Loan Payment',      data: [ this.state.loanPayment / 100 ] },
+                                                {name: 'Utilities',         data: [ this.state.utilities / 100 ] },
+                                                {name: 'Phone',             data: [ this.state.phone / 100 ] }
                                               ] }/>
         </div>
         <UserShowTransactionsTotal transactionsTotal={ this.state.transactionsTotal }/>
