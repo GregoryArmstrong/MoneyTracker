@@ -24,7 +24,7 @@ class Api::V1::TransactionsController < Api::V1::BaseController
     respond_with Transaction.where(user_id: current_user.id).sum(:amount)
   end
 
-  def health
+  def health_insurance
     respond_with :api, :v1, Transaction.where(user_id: current_user.id).where(category_id: 1).sum(:amount) * -1
   end
 
@@ -32,11 +32,11 @@ class Api::V1::TransactionsController < Api::V1::BaseController
     respond_with :api, :v1, Transaction.where(user_id: current_user.id).where(category_id: 2).sum(:amount) * -1
   end
 
-  def transportation
+  def car_payment
     respond_with :api, :v1, Transaction.where(user_id: current_user.id).where(category_id: 3).sum(:amount) * -1
   end
 
-  def entertainment
+  def car_insurance
     respond_with :api, :v1, Transaction.where(user_id: current_user.id).where(category_id: 4).sum(:amount) * -1
   end
 
@@ -46,6 +46,22 @@ class Api::V1::TransactionsController < Api::V1::BaseController
 
   def income
     respond_with :api, :v1, Transaction.where(user_id: current_user.id).where(category_id: 6).sum(:amount)
+  end
+
+  def rent
+    respond_with :api, :v1, Transaction.where(user_id: current_user.id).where(category_id: 7).sum(:amount) * -1
+  end
+
+  def loan_payment
+    respond_with :api, :v1, Transaction.where(user_id: current_user.id).where(category_id: 8).sum(:amount) * -1
+  end
+
+  def utilities
+    respond_with :api, :v1, Transaction.where(user_id: current_user.id).where(category_id: 9).sum(:amount) * -1
+  end
+
+  def phone
+    respond_with :api, :v1, Transaction.where(user_id: current_user.id).where(category_id: 10).sum(:amount) * -1
   end
 
   def daily_total
