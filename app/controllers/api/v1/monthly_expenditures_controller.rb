@@ -22,9 +22,8 @@ class Api::V1::MonthlyExpendituresController < Api::V1::BaseController
 
   def monthly_totals
     monthly_totals_hash = MonthlyExpenditure.where(user_id: current_user.id).group(:month).order(month: :asc).sum(:amount)
-    formatted_monthly_totals = []
-    monthly_totals_hash.each do |month, total|
-      formatted_monthly_totals.push([month, total])
+    formatted_monthly_totals = monthly_totals_hash.map do |month, total|
+      [month, total]
     end
     respond_with formatted_monthly_totals, json: formatted_monthly_totals
   end
