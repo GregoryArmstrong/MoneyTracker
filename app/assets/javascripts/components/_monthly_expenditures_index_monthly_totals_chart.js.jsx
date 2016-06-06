@@ -1,4 +1,4 @@
-var MonthlyExpendituresMonthlyTotalsChart = React.createClass({
+  var MonthlyExpendituresMonthlyTotalsChart = React.createClass({
   renderChart() {
     var node = this.refs.chartNode;
     var data = this.props.data;

@@ -33,10 +33,10 @@ var MonthlyExpendituresIndexBody = React.createClass({
                         };
     monthlyTotals.forEach( function(month, index, array) {
       if (index === 0) {
-        newMonthlyTotals.data.push( { name: month[0], y: (month[1] / 100) });
+        newMonthlyTotals.data.push( { name: monthNames[month[0]], y: (month[1] / 100) });
         xAxisCategories.push(monthNames[month[0]]);
       } else {
-        newMonthlyTotals.data.push( { name: month[0], y: ((month[1] / 100) + newMonthlyTotals.data[index - 1].y) });
+        newMonthlyTotals.data.push( { name: monthNames[month[0]], y: ((month[1] / 100) + newMonthlyTotals.data[index - 1].y) });
         xAxisCategories.push(monthNames[month[0]]);
       }
     });
@@ -92,9 +92,11 @@ var MonthlyExpendituresIndexBody = React.createClass({
       <div className='monthly-transactions-index-body'>
         <Header pageTitle='Monthly Planning' />
         <MonthlyExpendituresIndexNewMonthlyExpenditure handleSubmit={ this.handleSubmit } />
-        <MonthlyExpendituresMonthlyTotalsChart  data={ this.state.monthlyTotals }
-                                                xAxisCategories={this.state.xAxisCategories}
-                                                title='Monthly Expenditures' />
+        <div id='chart-container'>
+          <MonthlyExpendituresMonthlyTotalsChart  data={ this.state.monthlyTotals }
+                                                  xAxisCategories={this.state.xAxisCategories}
+                                                  title='Monthly Expenditures' />
+        </div>
         <ul>
           <MonthlyExpendituresIndexAllMonthlyExpenditures monthlyExpenditures={ this.state.monthlyExpenditures }
                                                           handleDelete={ this.handleDelete }
