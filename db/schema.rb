@@ -24,11 +24,11 @@ ActiveRecord::Schema.define(version: 20160526210404) do
 
   create_table "monthly_expenditures", force: :cascade do |t|
     t.integer  "amount"
-    t.string   "month"
     t.integer  "user_id"
     t.integer  "category_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "month"
   end
 
   add_index "monthly_expenditures", ["category_id"], name: "index_monthly_expenditures_on_category_id", using: :btree

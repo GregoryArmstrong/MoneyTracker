@@ -31,7 +31,8 @@ var MonthlyExpendituresIndexBody = React.createClass({
   },
 
   handleSubmit(monthlyExpenditure){
-    var newMonthlyExpenditures = this.state.monthlyExpenditures.concat(monthlyExpenditure)
+    var newMonthlyExpenditures = this.state.monthlyExpenditures.concat(monthlyExpenditure);
+    $.getJSON('/api/v1/monthly_expenditures/monthly_totals.json', (response) => { this.formatMonthlyTotals(response) } );
 
     this.setState({ monthlyExpenditures: newMonthlyExpenditures });
   },
@@ -77,7 +78,9 @@ var MonthlyExpendituresIndexBody = React.createClass({
       <div className='monthly-transactions-index-body'>
         <Header pageTitle='Monthly Planning' />
         <MonthlyExpendituresIndexNewMonthlyExpenditure handleSubmit={ this.handleSubmit } />
-        <MonthlyExpendituresMonthlyTotalsChart data={ this.state.monthlyTotals } xAxisCategories={this.state.xAxisCategories} title='Monthly Expenditures' />
+        <MonthlyExpendituresMonthlyTotalsChart  data={ this.state.monthlyTotals }
+                                                xAxisCategories={this.state.xAxisCategories}
+                                                title='Monthly Expenditures' />
         <ul>
           <MonthlyExpendituresIndexAllMonthlyExpenditures monthlyExpenditures={ this.state.monthlyExpenditures }
                                                           handleDelete={ this.handleDelete }
