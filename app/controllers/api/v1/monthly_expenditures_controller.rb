@@ -21,7 +21,7 @@ class Api::V1::MonthlyExpendituresController < Api::V1::BaseController
   end
 
   def monthly_totals
-    monthly_totals_hash = MonthlyExpenditure.where(user_id: current_user.id).group(:month).sum(:amount)
+    monthly_totals_hash = MonthlyExpenditure.where(user_id: current_user.id).group(:month).order(month: :asc).sum(:amount)
     formatted_monthly_totals = []
     monthly_totals_hash.each do |month, total|
       formatted_monthly_totals.push([month, total])

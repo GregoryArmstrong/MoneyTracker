@@ -17,13 +17,27 @@ var MonthlyExpendituresIndexBody = React.createClass({
                       data: []
                     };
     var xAxisCategories = [];
+    const monthNames = {
+                          1: 'January',
+                          2: 'February',
+                          3: 'March',
+                          4: 'April',
+                          5: 'May',
+                          6: 'June',
+                          7: 'July',
+                          8: 'August',
+                          9: 'September',
+                          10: 'October',
+                          11: 'November',
+                          12: 'December'
+                        };
     monthlyTotals.forEach( function(month, index, array) {
       if (index === 0) {
         newMonthlyTotals.data.push( { name: month[0], y: (month[1] / 100) });
-        xAxisCategories.push(month[0]);
+        xAxisCategories.push(monthNames[month[0]]);
       } else {
         newMonthlyTotals.data.push( { name: month[0], y: ((month[1] / 100) + newMonthlyTotals.data[index - 1].y) });
-        xAxisCategories.push(month[0]);
+        xAxisCategories.push(monthNames[month[0]]);
       }
     });
     this.setState({ monthlyTotals: [newMonthlyTotals] });

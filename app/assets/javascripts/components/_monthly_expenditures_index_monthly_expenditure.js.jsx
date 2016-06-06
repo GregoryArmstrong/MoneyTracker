@@ -27,21 +27,35 @@ var MonthlyExpenditure = React.createClass({
                             5: 'Miscellaneous',
                             6: 'Income'
                           };
+    const monthNames = {
+                          1: 'January',
+                          2: 'February',
+                          3: 'March',
+                          4: 'April',
+                          5: 'May',
+                          6: 'June',
+                          7: 'July',
+                          8: 'August',
+                          9: 'September',
+                          10: 'October',
+                          11: 'November',
+                          12: 'December'
+                        };
     var month         = this.state.editable ? ( <select ref='editableMonthlyExpenditureMonth' placeholder='Month'>
-                                                <option value='January'>January</option>
-                                                <option value='February'>February</option>
-                                                <option value='March'>March</option>
-                                                <option value='April'>April</option>
-                                                <option value='May'>May</option>
-                                                <option value='June'>June</option>
-                                                <option value='July'>July</option>
-                                                <option value='August'>August</option>
-                                                <option value='September'>September</option>
-                                                <option value='October'>October</option>
-                                                <option value='November'>November</option>
-                                                <option value='December'>December</option>
+                                                <option value='1'>January</option>
+                                                <option value='2'>February</option>
+                                                <option value='3'>March</option>
+                                                <option value='4'>April</option>
+                                                <option value='5'>May</option>
+                                                <option value='6'>June</option>
+                                                <option value='7'>July</option>
+                                                <option value='8'>August</option>
+                                                <option value='9'>September</option>
+                                                <option value='10'>October</option>
+                                                <option value='11'>November</option>
+                                                <option value='12'>December</option>
                                                 </select>)
-                                            : <h2> - { this.props.monthlyExpenditure.month } - </h2>;
+                                            : <h2> - { monthNames[this.props.monthlyExpenditure.month] } - </h2>;
     var categories    = this.state.editable ? (<select ref='editableMonthlyExpenditureCategory'>
                                                <option value='1'>Health</option>
                                                <option value='2'>Food</option>
