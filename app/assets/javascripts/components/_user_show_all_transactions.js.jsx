@@ -11,10 +11,10 @@ var UserShowAllTransactions = React.createClass({
     let transactions = this.props.transactions.map((transaction, index) => {
       return (
         <div key={ index }>
-          <Transaction  transaction={ transaction }
-                        handleDelete={ this.handleDelete.bind(this, transaction.id) }
-                        handleUpdate={ this.onUpdate }
-                        />
+          <Transaction
+            transaction={ transaction }
+            handleDelete={ this.handleDelete.bind(this, transaction.id) }
+            handleUpdate={ this.onUpdate } />
         </div>
       );
     });

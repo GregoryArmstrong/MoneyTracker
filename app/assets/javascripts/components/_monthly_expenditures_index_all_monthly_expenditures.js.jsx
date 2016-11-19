@@ -8,13 +8,15 @@ var MonthlyExpendituresIndexAllMonthlyExpenditures = React.createClass({
   },
 
   render(){
-    let monthlyExpenditures = this.props.monthlyExpenditures.map((monthlyExpenditure, index) => {
-      return (
-        <div key={ index }>
-          <MonthlyExpenditure monthlyExpenditure={ monthlyExpenditure }
-                              handleDelete={ this.handleDelete.bind(this, monthlyExpenditure.id)}
-                              handleUpdate={ this.onUpdate }
-                              />
+    let monthlyExpenditures = this.props.monthlyExpenditures.map(
+        (monthlyExpenditure, index) => {
+          return (
+            <div key={ index }>
+            <MonthlyExpenditure monthlyExpenditure={ monthlyExpenditure }
+                              handleDelete={ this.handleDelete.bind(
+                                  this, monthlyExpenditure.id)
+                              }
+                              handleUpdate={ this.onUpdate } />
         </div>
       );
     });
