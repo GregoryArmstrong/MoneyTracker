@@ -32,7 +32,7 @@ li {
   flex-direction: row;
   margin: 10px;
   position: relative;
-  border: 5;
+  border: 5px;
   border-color: #CFF09E;
   border-style: outset;
 }
@@ -41,6 +41,24 @@ li {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.nav-bar {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 5vh;
+  background-color: white;
+  padding-top: 20px;
+  padding-bottom: 5px;
+  z-index: 2;
+  border-top: 0px;
+  border-left: 0px;
+  border-right: 0px;
+  border-bottom: 5px;
+  border-color: #CFF09E;
+  border-style: outset;
 }
 
 .transaction, .monthly-expenditure {
@@ -73,6 +91,7 @@ li {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding-top: 75px;
 }
 
 .header {
