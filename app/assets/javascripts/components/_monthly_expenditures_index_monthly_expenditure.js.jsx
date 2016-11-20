@@ -68,7 +68,7 @@ var MonthlyExpenditure = React.createClass({
                                                <option value='5'>Miscellaneous</option>
                                                <option value='6'>Income</option>
                                                </select>)
-                                            : <h2> - { categoryNames[this.props.monthlyExpenditure.category_id] } - </h2>;
+                                            : <h2>{ categoryNames[this.props.monthlyExpenditure.category_id] } - </h2>;
     var amount        = this.state.editable ? <input type='text'
                                               ref='editableMonthlyExpenditureAmount'
                                               defaultValue={ this.props.monthlyExpenditure.amount / 100 } />

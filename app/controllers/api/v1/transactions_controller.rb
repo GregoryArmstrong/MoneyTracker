@@ -5,6 +5,10 @@ class Api::V1::TransactionsController < Api::V1::BaseController
                                        .order(date: :desc)
   end
 
+  def edit
+
+  end
+
   def create
     @transaction = Transaction.create(transaction_params)
     current_user.transactions << @transaction
