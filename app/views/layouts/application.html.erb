@@ -14,11 +14,13 @@
     <div class="nav-bar">
       Welcome, <%= current_user.username %>.
       <%= link_to "Logout", logout_path, method: :delete %>
-      <%= link_to "Transactions", user_path(current_user) %>
+      <%= link_to "All Transactions", user_path(current_user) %>
       <%= link_to "Monthly Planning", user_monthly_expenditures_path(current_user) %>
     </div>
   <% else %>
-    <%= link_to "Login", login_path %>
+    <div class="nav-bar">
+      <%= link_to "Login", login_path %>
+    </div>
   <% end %>
 
 

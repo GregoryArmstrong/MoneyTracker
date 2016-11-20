@@ -1,115 +1,127 @@
 body {
-  background-color: #0B486B !important;
-  color: white !important;
-  font-family: 'Poiret One', cursive;
+    background-color: #0B486B !important;
+    color: white !important;
+    font-family: 'Poiret One', cursive;
+}
+
+button,
+input,
+select {
+    padding: 10px;
+    margin: 10px;
+    font-size: 25px;
+    background-color: #3B8686;
+    border-color: #CFF09E;
+    border-style: outset;
+    border-radius: 15px;
+    font-family: 'Poiret One', cursive;
+    color: #CFF09E;
 }
 
 h1 {
-  padding: 10px;
-  margin: 10px;
-  color: #CFF09E !important;
+    padding: 10px;
+    margin: 10px;
+    color: #CFF09E !important;
 }
 
 h2 {
-  color: #A8DBA8 !important;
+    color: #A8DBA8 !important;
 }
 
 ul {
-  display: flex;
+    display: flex;
 }
 
 li {
-  display: inline-flex;
-}
-
-.all-transactions, .all-monthly-expenditures {
-  display: flex;
-  flex-direction: column;
-}
-
-.chart {
-  display: inline-flex;
-  flex-direction: row;
-  margin: 10px;
-  position: relative;
-  border: 5px;
-  border-color: #CFF09E;
-  border-style: outset;
-}
-
-#chart-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.nav-bar {
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  width: 100vw;
-  height: 5vh;
-  background-color: white;
-  padding-top: 20px;
-  padding-bottom: 5px;
-  z-index: 2;
-  border-top: 0px;
-  border-left: 0px;
-  border-right: 0px;
-  border-bottom: 5px;
-  border-color: #CFF09E;
-  border-style: outset;
-}
-
-.transaction, .monthly-expenditure {
-  padding: 5px;
-  margin: -2px;
-  background-color: #3B8686;
-  width: 100vw;
-  border-color: #CFF09E;
-  border-style: outset;
-}
-
-.transaction-amount {
-  position: absolute;
-  right: 25px;
-}
-
-.transactions-total {
-  position: relative;
-  float: right;
-  margin: 15px;
-}
-
-.new-transaction, .new-monthly-expenditure {
-  padding: 10px;
-  margin: auto;
-  position: relative;
-}
-
-.user-show-body, .monthly-transactions-index-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-top: 75px;
-}
-
-.header {
-  margin: auto;
-}
-
-button, input, select {
-  padding: 10px;
-  margin: 10px;
-  font-size: 25px;
-  background-color: #3B8686;
-  border-color: #CFF09E;
-  border-style: outset;
-  border-radius: 15px;
-  font-family: 'Poiret One', cursive;
-  color: #CFF09E;
+    display: inline-flex;
 }
 
 ::-webkit-input-placeholder {
-   color: #CFF09E;
+    color: #CFF09E;
+}
+
+.all-monthly-expenditures,
+.all-transactions {
+    display: flex;
+    flex-direction: column;
+}
+
+.chart {
+    display: inline-flex;
+    flex-direction: row;
+    margin: 10px;
+    position: relative;
+    border: 5px;
+    border-color: #CFF09E;
+    border-style: outset;
+}
+
+.header {
+    margin: auto;
+}
+
+.nav-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 5vh;
+    background-color: white;
+    padding-top: 30px;
+    padding-bottom: 5px;
+    padding-left: 25px;
+    z-index: 2;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 5px;
+    border-color: #CFF09E;
+    border-style: outset;
+    color: black;
+}
+
+.new-monthly-expenditure,
+.new-transaction {
+    padding: 10px;
+    margin: auto;
+    position: relative;
+}
+
+.monthly-expenditure,
+.transaction {
+    padding: 5px;
+    margin: -2px;
+    background-color: #3B8686;
+    width: 100vw;
+    border-color: #CFF09E;
+    border-style: outset;
+}
+
+.transaction-amount {
+    position: absolute;
+    right: 25px;
+}
+
+.transactions-total {
+    position: relative;
+    float: right;
+    margin: 15px;
+}
+
+.monthly-transactions-index-body,
+.user-show-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 100px;
+}
+
+#chart-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#login-field {
+    padding-top: 155px;
 }
