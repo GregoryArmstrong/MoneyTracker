@@ -10,8 +10,9 @@ class TransactionsController < ApplicationController
       redirect_to new_category_transaction_path
     elsif params[:category_id]
       @category = Category.find(params[:category_id])
-      @transactions = Transaction.where(category_id: params[:category_id]).where(user_id: current_user.id)
-    else 
+      @transactions = Transaction.where(category_id: params[:category_id])
+                                 .where(user_id: current_user.id)
+    else
       @transactions = Transaction.where(user_id: current_user.id)
       @categories = Category.all
       render :user_transactions
@@ -22,9 +23,9 @@ class TransactionsController < ApplicationController
     @transaction = Transaction.new
     if params[:category_id]
       @category = Category.find(params[:category_id])
-    else 
+    else
       @category = @selected_category
-    end 
+    end
   end
 
   def create
@@ -35,7 +36,7 @@ class TransactionsController < ApplicationController
       @user.transactions << @transaction
       flash[:notice] = "Transaction Added"
       redirect_to category_transactions_path(@category)
-    else 
+    else
       flash[:error] = "amount and description can't be blank"
       render :new
     end
@@ -52,7 +53,7 @@ class TransactionsController < ApplicationController
     if @transaction.update(transaction_params)
       flash[:notice] = "Transaction Updated"
       redirect_to category_transactions_path
-    else 
+    else
       flash[:error] = "amount and description can't be blank"
       render :edit
     end
@@ -73,10 +74,10 @@ class TransactionsController < ApplicationController
 
   def set_category
     @category = Category.find(params[:category_id])
-  end 
+  end
 
-  def set_transaction 
+  def set_transaction
     @transaction = Transaction.find(params[:id])
-  end 
+  end
 
 end

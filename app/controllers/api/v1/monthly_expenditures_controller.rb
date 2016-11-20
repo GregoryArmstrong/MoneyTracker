@@ -1,7 +1,8 @@
 class Api::V1::MonthlyExpendituresController < Api::V1::BaseController
 
   def index
-    respond_with :api, :v1, MonthlyExpenditure.where(user_id: current_user.id).order(month: :asc)
+    respond_with :api, :v1, MonthlyExpenditure.where(user_id: current_user.id)
+                                              .order(month: :asc)
   end
 
   def create
@@ -21,7 +22,9 @@ class Api::V1::MonthlyExpendituresController < Api::V1::BaseController
   end
 
   def monthly_totals
-    monthly_totals_hash = MonthlyExpenditure.where(user_id: current_user.id).group(:month).order(month: :asc).sum(:amount)
+    monthly_totals_hash = MonthlyExpenditure.where(user_id: current_user.id)
+                                            .group(:month).order(month: :asc)
+                                            .sum(:amount)
     formatted_monthly_totals = monthly_totals_hash.map do |month, total|
       [month, total]
     end
