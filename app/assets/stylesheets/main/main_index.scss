@@ -4,4 +4,27 @@
 
 .header {
   margin-top: 200px;
+  margin-left: 150px;
+}
+
+.mainIndexBodyHeader-appear {
+  opacity: 0.01;
+}
+
+.mainIndexBodyHeader-appear.mainIndexBodyHeader-appear-active {
+  opacity: 1;
+  transition: opacity 750ms ease-in;
+}
+
+.mainIndexBodyMessage-appear {
+  opacity: 0.01;
+}
+
+.mainIndexBodyMessage-appear.mainIndexBodyMessage-appear-active {
+  opacity: 1;
+  transition: opacity 2000ms ease-in;
+}
+
+#mainIndexBodyMessage {
+  margin-left: 250px;
 }

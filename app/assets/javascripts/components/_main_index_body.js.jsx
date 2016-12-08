@@ -1,7 +1,7 @@
 var MainIndexBody = React.createClass({
   render(){
     return (
-      <Header pageTitle='Welcome to MoneyTracker' />
+        <Header pageTitle='Welcome to MoneyTracker' />
     );
   }
 });
