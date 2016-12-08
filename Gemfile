@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -36,7 +36,7 @@ gem 'chartkick'
 gem 'groupdate'
 gem 'hightop'
 gem 'active_median'
-gem 'react-rails'
+gem 'react-rails', '~> 1.9.0'
 gem 'responders'
 gem 'pry'
 gem 'highcharts-rails'

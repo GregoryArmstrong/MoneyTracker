@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get '', to: 'main#index'
+
   resources :users, only: [:new, :create, :show] do
     resources :transactions, only: [:index]
     resources :monthly_expenditures, only: [:index]
@@ -39,5 +41,6 @@ Rails.application.routes.draw do
       resources :monthly_expenditures, only: [:index, :create, :show, :update, :destroy]
     end
   end
+
 
 end
