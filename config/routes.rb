@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create, :show] do
     resources :transactions, only: [:index]
     resources :monthly_expenditures, only: [:index]
+    resources :loans, only: [:index]
   end
 
   get '/login', to: 'sessions#new'
@@ -37,6 +38,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :users, only: [:create, :show]
+      resources :loans, only: [:index, :create, :show, :destroy]
       resources :transactions, only: [:index, :create, :show, :update, :destroy]
       resources :monthly_expenditures, only: [:index, :create, :show, :update, :destroy]
     end
