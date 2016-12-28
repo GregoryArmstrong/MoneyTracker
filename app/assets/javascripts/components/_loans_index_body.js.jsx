@@ -42,10 +42,10 @@ var LoansIndexBody = React.createClass({
         <LoansIndexHeader pageTitle="Loans Index"/>
         <UserShowNewLoan handleSubmit={ this.handleSubmit }
                          user={ this.props.user } />
-        <ul>
-          <UserShowAllLoans loans={ this.state.loans }
-                            handleDelete={ this.handleDelete }/>
-        </ul>
+        <UserShowLoanPayment handleSubmit={ this.handleSubmit }
+                             loans={ this.state.loans } />
+        <UserShowAllLoans loans={ this.state.loans }
+                          handleDelete={ this.handleDelete }/>
       </div>
     );
   }

@@ -42,7 +42,8 @@ li {
 }
 
 .all-monthly-expenditures,
-.all-transactions {
+.all-transactions,
+.all-loans {
     display: flex;
     flex-direction: column;
 }
@@ -82,20 +83,48 @@ li {
 }
 
 .new-monthly-expenditure,
-.new-transaction {
+.new-transaction,
+.new-loan {
     padding: 10px;
     margin: auto;
     position: relative;
 }
 
 .monthly-expenditure,
-.transaction {
+.transaction,
+.loan {
     padding: 5px;
     margin: -2px;
     background-color: #3B8686;
     width: 100vw;
     border-color: #CFF09E;
     border-style: outset;
+}
+
+.loan {
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.loan button {
+  flex-grow: 1;
+  width: 350px;
+  align-self: center;
+  text-align: center;
+  margin: 0px;
+  padding: 0px;
+}
+
+.loan h2 {
+  flex-grow: 1;
+  width: 350px;
+  align-self: center;
+  text-align: center;
+  padding: 0px;
+  margin-right: 0px;
 }
 
 .transaction-amount {

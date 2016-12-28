@@ -15,6 +15,7 @@ var UserShowAllLoans = React.createClass({
 
     return (
       <div className='all-loans'>
+        <LoanTableHeader />
         { loans }
       </div>
     );

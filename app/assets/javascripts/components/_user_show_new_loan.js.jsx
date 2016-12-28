@@ -20,7 +20,8 @@ var UserShowNewLoan = React.createClass({
 
   render(){
     return(
-      <div className='new-Loan'>
+      <div className='new-loan'>
+        <h2>New Loan:</h2>
         <input ref='loanName'
                placeholder='Loan Name' />
         <input ref='loanPrincipal'

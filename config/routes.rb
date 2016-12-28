@@ -27,6 +27,8 @@ Rails.application.routes.draw do
 
   get '/api/v1/monthly_expenditures/monthly_totals', to: 'api/v1/monthly_expenditures#monthly_totals'
 
+  post '/api/v1/loans/payment', to: 'api/v1/loans#payment'
+
   namespace :admin do
     resources :categories, only: [:index, :new, :create, :edit, :update, :destroy]
   end
