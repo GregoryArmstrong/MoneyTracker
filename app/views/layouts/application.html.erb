@@ -15,6 +15,7 @@
       <%= link_to "Logout", logout_path, method: :delete %>
       <%= link_to "All Transactions", user_path(current_user) %>
       <%= link_to "Monthly Planning", user_monthly_expenditures_path(current_user) %>
+      <%= link_to "Loans Tracking", user_loans_path(current_user) %>
     </div>
   <% else %>
     <div class="nav-bar">
