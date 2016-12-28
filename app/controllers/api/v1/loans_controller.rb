@@ -15,14 +15,14 @@ class Api::V1::LoansController < Api::V1::BaseController
   end
 
   def payment
-    @loan = Loan.find(loan_payment_params[:id])
+    @loan = current_user.loans.find(loan_payment_params[:id])
     original_payment = loan_payment_params[:payment].to_i
     original_loan_interest = @loan.interest
-    if @loan.interest && (original_payment <= original_loan_interest)
-      @loan.interest -= original_payment
-    elsif @loan.interest && (original_payment >= original_loan_interest)
+    if original_loan_interest && (original_payment <= original_loan_interest)
+      subtract_interest(@loan, original_payment, false)
+    elsif original_loan_interest && (original_payment >= original_loan_interest)
       leftover_payment = original_payment - original_loan_interest
-      @loan.interest = 0
+      subtract_interest(@loan, original_payment, true)
       @loan.principal -= leftover_payment
     elsif @loan.principal && (original_payment >= @loan.principal)
       @loan.principal -= original_payment
@@ -32,6 +32,14 @@ class Api::V1::LoansController < Api::V1::BaseController
   end
 
   private
+
+  def subtract_interest(loan, payment, eliminate_all_interest)
+    if eliminate_all_interest
+      loan.interest = 0
+    else
+      loan.interest -= payment
+    end
+  end
 
   def loan_params
     params.require(:loan).permit(:name,
