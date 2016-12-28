@@ -1,5 +1,5 @@
 var LoansIndexBody = React.createClass({
-  getInitialState() {
+  getInitialState(){
     return { loans: [] };
   },
 
@@ -44,6 +44,7 @@ var LoansIndexBody = React.createClass({
                          user={ this.props.user } />
         <UserShowLoanPayment handleSubmit={ this.handleSubmit }
                              loans={ this.state.loans } />
+        <UserShowAllLoansTotal loans={ this.state.loans } />
         <UserShowAllLoans loans={ this.state.loans }
                           handleDelete={ this.handleDelete }/>
       </div>
