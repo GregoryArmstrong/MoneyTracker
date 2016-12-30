@@ -41,9 +41,9 @@ li {
     color: #CFF09E;
 }
 
+.all-loans,
 .all-monthly-expenditures,
-.all-transactions,
-.all-loans {
+.all-transactions {
     display: flex;
     flex-direction: column;
 }
@@ -82,17 +82,30 @@ li {
     color: black;
 }
 
+.new-loan,
+.new-loan-payment,
 .new-monthly-expenditure,
-.new-transaction,
-.new-loan {
-    padding: 10px;
-    margin: auto;
-    position: relative;
+.new-transaction {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: center;
+  flex-direction: row;
+  padding: 10px;
+  margin: auto;
+  position: relative;
 }
 
+.new-loan-payment select,
+.new-monthly-expenditure select,
+.new-transaction select {
+  height: 52.2px;
+}
+
+.loan,
 .monthly-expenditure,
-.transaction,
-.loan {
+.transaction {
     padding: 5px;
     margin: -2px;
     background-color: #3B8686;
