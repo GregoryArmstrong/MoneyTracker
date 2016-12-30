@@ -17,7 +17,7 @@ var NewSessionMain = React.createClass({
     return (
       <div id='login-field'>
         <input ref='userName' placeholder='User Name' />
-        <input ref='userPassword' placeholder='Password' />
+        <input ref='userPassword' placeholder='Password' type='password'/>
         <button onClick={ this.handleClick }>Login</button>
       </div>
     );

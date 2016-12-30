@@ -1,25 +1,5 @@
 var Transaction = React.createClass({
   getInitialState() {
-    return { editable: false }
-  },
-
-  onUpdate() {
-    if (this.state.editable) {
-      let transaction = {
-                          id: this.props.transaction.id,
-                          description: this.refs.description.value,
-                          amount: this.refs.amount.value * 100,
-                          category_id: this.refs.editableTransactionCategory.value,
-                          date: this.refs.transactionDate.value
-                        }
-
-      this.props.handleUpdate(transaction);
-    }
-
-    this.setState({ editable: !this.state.editable })
-  },
-
-  render(){
     const categoryNames = {
                             1: 'Health Insurance',
                             2: 'Food',
@@ -32,32 +12,63 @@ var Transaction = React.createClass({
                             9: 'Utilities',
                             10: 'Phone'
                           };
+    return { editable: false,
+             categoryNames: categoryNames };
+  },
+
+  onUpdate() {
+    if (this.state.editable) {
+      let transaction = {
+                          id: this.props.transaction.id,
+                          description: this.refs.description.value,
+                          amount: this.refs.amount.value * 100,
+                          category_id: this.refs.editableTransactionCategory.value,
+                          date: this.refs.transactionDate.value
+                        };
+
+      this.props.handleUpdate(transaction);
+    }
+
+    this.setState({ editable: !this.state.editable });
+  },
+
+  createCategoryOptions() {
+    let that = this;
+    let categoryOptions = Object.keys(this.state.categoryNames).map((key, index) => {
+      return (
+        <option value={ key } key={ index }>
+          { this.state.categoryNames[key] }
+        </option>
+      );
+    });
+    return categoryOptions;
+  },
+
+  render(){
+    let transactionDescription = this.props.transaction.description;
     var description   = this.state.editable ? <input type='text'
                                                    ref='description'
-                                                   defaultValue={ this.props.transaction.description } />
-                                            : <h1>{ this.props.transaction.description }</h1>;
+                                                   defaultValue={ transactionDescription } />
+                                            : <h1>{ transactionDescription }</h1>;
+    let transactionAmount = this.props.transaction.amount;
     var amount        = this.state.editable ? <input type='text'
                                               ref='amount'
-                                              defaultValue={ this.props.transaction.amount / 100 } />
-                                            : <h2 className='transaction-amount'>${ this.props.transaction.amount / 100 }</h2>;
-    var categories    = this.state.editable ? (<select ref='editableTransactionCategory'>
-                                                <option value='1'>Health Insurance</option>
-                                                <option value='2'>Food</option>
-                                                <option value='3'>Car Payment</option>
-                                                <option value='4'>Car Insurance</option>
-                                                <option value='5'>Miscellaneous</option>
-                                                <option value='6'>Income</option>
-                                                <option value='7'>Rent</option>
-                                                <option value='8'>Loan Payment</option>
-                                                <option value='9'>Utilities</option>
-                                                <option value='10'>Phone</option>
-                                             </select>)
-                                            : <h2> - { categoryNames[this.props.transaction.category_id] } - </h2>;
-    var date          = this.state.editable ? <input ref='transactionDate' type='date' name='date' />
-                                            : <h2>{ this.props.transaction.date }</h2>;
-
-    var submitOrEdit  = this.state.editable ? 'Submit'
-                                            : 'Edit';
+                                              defaultValue={ transactionAmount / 100 } />
+                                            : <h2 className='transaction-amount'>$ { transactionAmount / 100 }</h2>;
+    let transactionCategoryID = this.props.transaction.category_id;
+    let transactionCategoryName = this.state.categoryNames[transactionCategoryID];
+    var categories    = this.state.editable ? (<select ref='editableTransactionCategory'
+                                                       defaultValue={ transactionCategoryID }>
+                                                { this.createCategoryOptions() }
+                                               </select>)
+                                            : <h2> - { transactionCategoryName } - </h2>;
+    let transactionDate = this.props.transaction.date;
+    var date          = this.state.editable ? <input ref='transactionDate'
+                                                     type='date'
+                                                     name='date'
+                                                     defaultValue={ transactionDate }/>
+                                            : <h2>{ transactionDate }</h2>;
+    var submitOrEdit  = this.state.editable ? 'Submit' : 'Edit';
     return (
       <div>
         <li className='transaction'>
