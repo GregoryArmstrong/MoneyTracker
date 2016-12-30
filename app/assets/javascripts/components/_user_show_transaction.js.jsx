@@ -33,27 +33,25 @@ var Transaction = React.createClass({
   },
 
   createCategoryOptions() {
-    let that = this;
-    let categoryOptions = Object.keys(this.state.categoryNames).map((key, index) => {
+    return Object.keys(this.state.categoryNames).map((key, index) => {
       return (
         <option value={ key } key={ index }>
           { this.state.categoryNames[key] }
         </option>
       );
     });
-    return categoryOptions;
   },
 
   render(){
     let transactionDescription = this.props.transaction.description;
     var description   = this.state.editable ? <input type='text'
-                                                   ref='description'
-                                                   defaultValue={ transactionDescription } />
+                                                     ref='description'
+                                                     defaultValue={ transactionDescription } />
                                             : <h1>{ transactionDescription }</h1>;
     let transactionAmount = this.props.transaction.amount;
     var amount        = this.state.editable ? <input type='text'
-                                              ref='amount'
-                                              defaultValue={ transactionAmount / 100 } />
+                                                     ref='amount'
+                                                     defaultValue={ transactionAmount / 100 } />
                                             : <h2 className='transaction-amount'>$ { transactionAmount / 100 }</h2>;
     let transactionCategoryID = this.props.transaction.category_id;
     let transactionCategoryName = this.state.categoryNames[transactionCategoryID];
