@@ -1,4 +1,4 @@
-  var Transaction = React.createClass({
+var Transaction = React.createClass({
   getInitialState() {
     const categoryNames = {
                             1: 'Health Insurance',
@@ -13,7 +13,7 @@
                             10: 'Phone'
                           };
     return { editable: false,
-             categoryNames: categoryNames }
+             categoryNames: categoryNames };
   },
 
   onUpdate() {
@@ -24,19 +24,19 @@
                           amount: this.refs.amount.value * 100,
                           category_id: this.refs.editableTransactionCategory.value,
                           date: this.refs.transactionDate.value
-                        }
+                        };
 
       this.props.handleUpdate(transaction);
     }
 
-    this.setState({ editable: !this.state.editable })
+    this.setState({ editable: !this.state.editable });
   },
 
   createCategoryOptions() {
     let that = this;
     let categoryOptions = Object.keys(this.state.categoryNames).map((key, index) => {
       return (
-        <option value={ this.state.categoryNames[key] } key={ index }>
+        <option value={ key } key={ index }>
           { this.state.categoryNames[key] }
         </option>
       );
@@ -56,15 +56,18 @@
                                               defaultValue={ transactionAmount / 100 } />
                                             : <h2 className='transaction-amount'>$ { transactionAmount / 100 }</h2>;
     let transactionCategoryID = this.props.transaction.category_id;
-    let categoryName = this.state.categoryNames[transactionCategoryID];
+    let transactionCategoryName = this.state.categoryNames[transactionCategoryID];
     var categories    = this.state.editable ? (<select ref='editableTransactionCategory'
-                                                       defaultValue={ categoryName }>
+                                                       defaultValue={ transactionCategoryID }>
                                                 { this.createCategoryOptions() }
                                                </select>)
-                                            : <h2> - { categoryName } - </h2>;
-    var date          = this.state.editable ? <input ref='transactionDate' type='date' name='date' />
-                                            : <h2>{ this.props.transaction.date }</h2>;
-
+                                            : <h2> - { transactionCategoryName } - </h2>;
+    let transactionDate = this.props.transaction.date;
+    var date          = this.state.editable ? <input ref='transactionDate'
+                                                     type='date'
+                                                     name='date'
+                                                     defaultValue={ transactionDate }/>
+                                            : <h2>{ transactionDate }</h2>;
     var submitOrEdit  = this.state.editable ? 'Submit' : 'Edit';
     return (
       <div>
