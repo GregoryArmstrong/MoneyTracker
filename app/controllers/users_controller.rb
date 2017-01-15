@@ -11,7 +11,7 @@ class UsersController < ApplicationController
       redirect_to @user
     else
       flash.now[:error] = @user.errors.full_messages.join(", ")
-      render :new
+      redirect_to new_user_path
     end
   end
 
