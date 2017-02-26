@@ -62,7 +62,7 @@ var MonthlyExpendituresIndexBody = React.createClass({
     this.setState({ monthlyExpenditures: newMonthlyExpenditures });
   },
 
-  updateMonthlyExpenditures(monthlyExpenditure) {
+  updateMonthlyExpenditures(monthlyExpenditure){
     let monthlyExpenditures = this.state.monthlyExpenditures.filter((mE) => {
       return mE.id != monthlyExpenditure.id;
     });
@@ -71,7 +71,7 @@ var MonthlyExpendituresIndexBody = React.createClass({
     this.setState({ monthlyExpenditures: monthlyExpenditures });
   },
 
-  handleUpdate(monthlyExpenditure) {
+  handleUpdate(monthlyExpenditure){
     $.ajax({
       url: `/api/v1/monthly_expenditures/${monthlyExpenditure.id}`,
       type: 'PUT',
@@ -82,7 +82,7 @@ var MonthlyExpendituresIndexBody = React.createClass({
     });
   },
 
-  handleDelete(id) {
+  handleDelete(id){
     $.ajax({
       url: `/api/v1/monthly_expenditures/${id}`,
       type: 'DELETE',
@@ -92,11 +92,12 @@ var MonthlyExpendituresIndexBody = React.createClass({
     });
   },
 
-  removeMonthlyExpenditureFromDOM(id) {
+  removeMonthlyExpenditureFromDOM(id){
     let newMonthlyExpenditures = this.state.monthlyExpenditures.filter(
       (monthlyExpenditure) => {
-      return monthlyExpenditure.id != id;
-    });
+        return monthlyExpenditure.id != id;
+      }
+    );
 
     this.setState({ monthlyExpenditures: newMonthlyExpenditures });
   },
