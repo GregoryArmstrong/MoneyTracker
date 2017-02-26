@@ -19,7 +19,7 @@ var UserShowAllLoansTotal = React.createClass({
 
     return(
       <div>
-        <h2>Total Outstanding Loans ($): { this.state.loansTotal }</h2>
+        <h2>Total Outstanding Loans ($): { Math.round(this.state.loansTotal) }</h2>
       </div>
     );
   }

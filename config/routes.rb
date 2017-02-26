@@ -33,16 +33,13 @@ Rails.application.routes.draw do
     resources :categories, only: [:index, :new, :create, :edit, :update, :destroy]
   end
 
-  resources :categories, only: [:index, :show] do
-    resources :transactions #, except: [:show]
-  end
-
   namespace :api do
     namespace :v1 do
-      resources :users, only: [:create, :show]
+      resources :categories, only: [:index, :create, :destroy]
       resources :loans, only: [:index, :create, :show, :destroy]
-      resources :transactions, only: [:index, :create, :show, :update, :destroy]
       resources :monthly_expenditures, only: [:index, :create, :show, :update, :destroy]
+      resources :transactions, only: [:index, :create, :show, :update, :destroy]
+      resources :users, only: [:create, :show]
     end
   end
 

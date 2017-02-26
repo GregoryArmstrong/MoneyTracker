@@ -9,6 +9,9 @@ var NewSessionMain = React.createClass({
       data: { session: { username: name, password: password }},
       success: (user) => {
         window.location.href = "/users/" + user.id;
+      },
+      error: (xhr) => {
+        window.location.href = '/login';
       }
     });
   },

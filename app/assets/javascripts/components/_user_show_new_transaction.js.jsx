@@ -1,5 +1,5 @@
 var UserShowNewTransaction = React.createClass({
-  handleClick() {
+  handleClick(){
     let description    = this.refs.transactionDescription.value;
     let amount         = ( this.refs.transactionAmount.value * 100 * -1 );
     let category       = this.refs.transactionCategory.value;

@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
       respond_with @user
     else
       flash.now[:error] = "Invalid. Try Again."
-      render :new
+      render :new, status: 404
     end
   end
 
